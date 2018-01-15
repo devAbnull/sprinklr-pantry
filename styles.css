@@ -120,3 +120,88 @@ ul{
     width: 24%;
     display: inline-block;
 }
+
+.order-list {
+    padding-left: 5%;
+}
+
+.order {
+    width: 90%;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0,0,0,.125);
+    margin: 5px 0;
+}
+
+.pend {
+    background-color: #d9edf7;
+}
+
+.comp {
+    background-color: #dff0d8;
+}
+
+.ordered-by{
+    width: 35%;
+    float: left;
+}
+
+.vertical-center-margin {
+    margin: 37px 0;
+}
+
+.order-item {
+    width: 20%;
+    float: left;
+    font-size: 20px;
+}
+
+.admin-pg-qty{
+    width: 10%;
+    float: left;
+}
+
+.time {
+    width: 10%;
+    float: left;
+}
+
+.status {
+    width: 25%;
+    float: left;
+}
+
+.usr-img {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    float: left;
+    border-radius: 50px;
+    background-image: url("https://image.flaticon.com/icons/svg/17/17004.svg") ;
+    background-size: cover;
+}
+
+.usr-details {
+    margin: 30px 10px;
+    float: left;
+}
+
+.username {
+    font-size: 20px;
+}
+
+.status-btn {
+    width: 73%;
+    height: 30px;
+    font-size: 17px;
+    margin: 30px 0 2px 0;
+    color: #fff;
+    border: none;
+}
+
+.status-btn-pend {
+    background-color: #31708f;
+}
+
+.status-btn-complete {
+    background-color: #3c763d;
+}
