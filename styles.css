@@ -74,7 +74,7 @@ button:focus {
 
 .content {
     position: fixed;
-    top: 100px;
+    top: 90px;
     width: 100%;
 }
 
@@ -128,7 +128,7 @@ button:focus {
     color: #fff;
     border-radius: 4px;
     padding: 3px 9px;
-    margin-left: 5px;
+    float: right;
 }
 
 .categories-btn {
