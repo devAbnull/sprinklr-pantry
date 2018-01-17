@@ -100,7 +100,7 @@ button:focus {
     margin: 0 15px;
     border-radius: 3px;
     padding: 10px 10px;
-    height: 705px;
+    height: 700px;
     overflow-y: scroll;
 }
 
@@ -117,7 +117,7 @@ button:focus {
     float: right;
     background-color: #fff;
     border-radius: 3px;
-    height: 350px;
+    height: 357px;
     overflow-y: scroll;
 }
 
