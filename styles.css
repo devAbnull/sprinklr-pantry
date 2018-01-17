@@ -1,7 +1,7 @@
-header {
-    background-color: #2a6592;
+.main-header {
+    background-color: #488dd8;
     color: #fff;
-    padding: 20px;
+    padding: 10px 4%;
     font-size: 28px;
     text-align: center;
     position: fixed;
@@ -9,11 +9,26 @@ header {
     z-index: 1000;
     top: 0;
     left: 0;
-    width: 96%;
+    width: 92%;
+}
+
+.categories-nav {
+    height: 32px;
+    position: fixed;
+    top: 53px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.1);
+    font-size: 15px;
 }
 
 body {
     background-color: #eee;
+    margin: 0;
+}
+
+.av-items-header {
+    display: inline-block;
 }
 
 .fa {
@@ -25,7 +40,26 @@ button:focus {
 }
 
 .show-cart-icon {
-    margin: 10px;
+    float: left;
+}
+
+.user-name{
+    float: right;
+    display: inline-block;
+    font-size: 17px;
+    padding-top: 10px;
+    margin-left: 20px;
+}
+
+.cart-label {
+    float: left;
+    font-size: 18px;
+    padding: 0 7px;
+    cursor: pointer;
+}
+
+.pending-order-list {
+    float: right;
 }
 
 .overlay {
@@ -47,7 +81,7 @@ button:focus {
 
 .content {
     position: fixed;
-    top: 67px;
+    top: 100px;
     width: 100%;
 }
 
@@ -66,16 +100,59 @@ button:focus {
     display: inline-block;
     float: left;
     background-color: #fff;
-    margin: 25px 15px;
+    margin: 0 15px;
     border-radius: 3px;
+    padding: 0 10px;
 }
 
 .width-30 {
     width: 24%;
     display: inline-block;
     background-color: #fff;
-    margin: 25px 0px;
     border-radius: 3px;
+}
+
+.categories-btn {
+    float: right;
+    display: inline-block;
+    margin: 20px 30px 0 0;
+    height: 30px;
+    width: 150px;
+    font-size: 14px;
+    background: #1b926c;
+    color: #fff;
+    position: relative;
+}
+
+.categories-list {
+    z-index: 1;
+    padding: 0px 10px;
+    /* background: #f5f5f5; */
+    color: #333;
+    /* color: black; */
+    /* top: 15px; */
+    /* right: 0; */
+    /* border: 1px solid #eee; */
+    width: 75%;
+    float: left;
+    margin: 0;
+    height: 100%;
+}
+
+.categories-btn:hover .categories-list{
+    display: block;
+}
+
+.category-blck {
+    display: block;
+    padding: 7px 15px 5px 12px;
+    text-align: left;
+}
+
+.category-blck:hover {
+    text-decoration: none;
+    color: #262626;
+    background-color: #eee;
 }
 
 .item-card {
@@ -143,11 +220,12 @@ button:focus {
     padding-left: 7px;
     float: left;
     width: 93%;
+    text-align: center;
 }
 
 .item-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     margin: 5px 0;
 }
 
@@ -176,6 +254,12 @@ button:focus {
 
 .item-list {
     padding: 0px;
+    margin-top: 0;
+}
+
+.item-name {
+    width: 30%;
+    display: inline-block;
 }
 
 .item-pend-card {
@@ -257,8 +341,14 @@ ul{
     border-radius: 0.25rem;
     border: 1px solid rgba(0,0,0,.125);
     margin: 5px 0;
+    display: inline-block;
 }
 
+.order-item {
+    display: block;
+    width: 25%;
+    float: left;
+}
 .pend {
     background-color: #d9edf7;
     border-color: #31708f;
@@ -299,9 +389,9 @@ ul{
 }
 
 .usr-img {
-    width: 100px;
-    height: 100px;
-    margin: 5px;
+    width: 80px;
+    height: 80px;
+    margin: 10px;
     float: left;
     border-radius: 50px;
     background-image: url("https://image.flaticon.com/icons/svg/17/17004.svg") ;
@@ -337,6 +427,10 @@ ul{
 .show-cart {
     float: right;
     background-color: transparent;
+    width: 55px;
+    height: 23px;
+    padding-top: 10px;
+    overflow: hidden;
 }
 
 .popup-content {
@@ -354,12 +448,12 @@ ul{
     display: flex;
     align-items: center;
     border: 1px solid #eee;
-    padding: 5px;
+    padding: 10px;
 }
 
 .cart-item-img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 60px;
     float: left;
 }
 
