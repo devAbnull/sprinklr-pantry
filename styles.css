@@ -22,11 +22,12 @@
 .categories-nav {
     height: 32px;
     position: fixed;
-    top: 53px;
-    width: 100%;
+    top: 50px;
+    width: 98%;
     background-color: #fff;
     box-shadow: 0 3px 5px 0 rgba(0,0,0,.1);
     font-size: 15px;
+    padding-right: 21px;
 }
 
 body {
@@ -46,23 +47,12 @@ button:focus {
     outline: none;
 }
 
-.show-cart-icon {
-    float: left;
-}
-
 .user-name{
     float: right;
     display: inline-block;
     font-size: 17px;
     padding-top: 10px;
     margin-left: 20px;
-}
-
-.cart-label {
-    float: left;
-    font-size: 18px;
-    padding: 0 7px;
-    cursor: pointer;
 }
 
 .overlay {
@@ -221,29 +211,29 @@ button:focus {
     background: rgba(0,0,0,0.7);
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
 }
+
 
 .add-cart-icon {
     background: transparent;
     color: white;
     width: 60%;
-    margin: 0 14px;
+    margin: 12px 35px;
     /* height: 40px; */
     font-size: 16px;
     padding: 4px;
-    margin: 70px 40px;
     cursor: pointer;
 }
 
 
-.item-img:hover ~ .overlay-img {
-    display: block;
-}
-
-.overlay-img:hover {
-    display: block;
+.item-img:hover ~ .overlay-img, .overlay-img:hover {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 11px;
 }
 
 .item-content {
@@ -402,10 +392,28 @@ ul{
 .show-cart {
     float: right;
     background-color: transparent;
-    width: 55px;
-    height: 23px;
-    padding-top: 10px;
-    overflow: hidden;
+    width: 85px;
+    height: 100%;
+    color:  #3c763d;
+    border-radius: 0;
+    padding: 0 5px;
+    margin-right: 10px;
+}
+
+.show-cart:hover {
+    background: #eee;
+}
+
+
+.show-cart-icon, .cart-label {
+    float: left;
+    margin-top: 5px;
+}
+
+.cart-label {
+    font-size: 18px;
+    padding: 0 7px;
+    cursor: pointer;
 }
 
 .popup-content {
