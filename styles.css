@@ -150,12 +150,7 @@ button:focus {
 .categories-list {
     z-index: 1;
     padding: 0px 10px;
-    /* background: #f5f5f5; */
     color: #333;
-    /* color: black; */
-    /* top: 15px; */
-    /* right: 0; */
-    /* border: 1px solid #eee; */
     width: 75%;
     float: left;
     margin: 0;
@@ -401,7 +396,7 @@ ul{
     color:  #3c763d;
     border-radius: 0;
     padding: 0 5px;
-    margin-right: 3%;
+    margin-right: 7%;
 }
 
 .show-cart:hover {
@@ -482,7 +477,7 @@ ul{
     text-decoration: none;
 }
 
-.place-order-btn, .add-new-item-btn {
+.place-order-btn, .add-new-item-btn, .cancel-order-btn {
     float: right;
     width: fit-content;
     height: 30px;
