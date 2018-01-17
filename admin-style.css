@@ -1,0 +1,154 @@
+.main-header {
+    background-color: #488dd8;
+    color: #fff;
+    padding: 10px 4%;
+    font-size: 24px;
+    text-align: center;
+    position: fixed;
+    min-width: auto;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 92%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.order-list {
+    position: fixed;
+    top: 60px;
+    width: 90%;
+    padding: 10px 5%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.order {
+    width: 15%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    min-width: 290px;
+    border-radius: 3px;
+}
+
+.pending {
+    background-color: #d9edf7;
+    border: 1px solid #31708f;
+}
+
+.completed {
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+}
+
+.usr-block {
+    height: 100px;
+    width: 100%;
+}
+
+.user-details {
+    float: left;
+    margin: 20px 10px;
+}
+
+.username, .user-table {
+    display: block;
+}
+
+.usr-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    float: right;
+
+}
+
+.order-details {
+    width: 100%;
+    float: left;
+}
+
+.order-status {
+    font-size: 16px;
+    border: none;
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+.pending .order-status {
+    color: #31708f;
+}
+
+.completed .order-status{
+    color: #3c763d;
+
+}
+
+.order-status:focus {
+    border: none;
+    outline: none;
+}
+
+.action-block {
+    width: 100%;
+    text-align: right;
+}
+
+.order-items, .order-time-status {
+    padding: 10px 10px 0px 10px;
+    width: 40%;
+    float: left;
+    margin-top: 10px;
+}
+
+.order-label {
+    margin-bottom: 7px;
+    display: block;
+}
+
+.item-detail {
+    display: block;
+    overflow: hidden;
+}
+
+.order-time-status {
+    float: right;
+    text-align: right;
+}
+
+.order-time {
+    margin: 0 5px;
+}
+
+.item-name {
+    padding-right: 5px;
+    width: 100px;
+    display: block;
+    float: left;
+}
+
+.item-qty {
+    display: block;
+    float: left;
+}
+
+.action-button {
+    border: none;
+    color: white;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.complete {
+    background: #1b926c;
+}
+
+.reject {
+    background: #cb202d;
+}

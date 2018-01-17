@@ -1,127 +1,144 @@
 <html>
     <head>
-        <link rel="stylesheet" href="styles.css" >
+        <link rel="stylesheet" href="admin-style.css" >
     </head>
     <body>
-        <header>
+        <header class="main-header">
             Sprinklr Pantry
         </header>
-        <ul class="content order-list">
-            <li class="order pend">
-                <div class="ordered-by">
+        <div class="order-list">
+            <div class="order pending">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
                     <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
-                    <div class="usr-details">
-                        <div class="username">Abhijit Patel</div>
-                        Table 4
-                    </div>
                 </div>
-                <div class="order-item vertical-center-margin">
-                    <a href="#popup2">Tea +2 items</a>
-                </div>
-                <div class="time vertical-center-margin">
-                    10:25
-                </div>
-                <div class="status">
-                    <div class="status-pend vertical-center-margin">
-                        Pending
-                    </div>
-                </div>
-            </li>
-            <li class="order comp">
-                <div class="ordered-by">
-                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
-                    <div class="usr-details">
-                        <div class="username">Abhijit Patel</div>
-                        Table 4
-                    </div>
-                </div>
-                <div class="order-item vertical-center-margin">
-                    <a>Coffee +2 items</a>
-                </div>
-                <div class="time vertical-center-margin">
-                    10:25
-                </div>
-                <div class="status">
-                    <div class="status-complete vertical-center-margin">
-                        Complete
-                    </div>
-                </div>
-            </li>
-            <li class="order pend">
-                <div class="ordered-by">
-                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
-                    <div class="usr-details">
-                        <div class="username">Abhijit Patel</div>
-                        Table 4
-                    </div>
-                </div>
-                <div class="order-item vertical-center-margin">
-                    <a>Tea</a>
-                </div>
-                <div class="time vertical-center-margin">
-                    10:25
-                </div>
-                <div class="status">
-                    <div class="status-pend vertical-center-margin">
-                        Pending
-                    </div>
-                </div>
-            </li>
-            <li class="order pend">
-                <div class="ordered-by">
-                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
-                    <div class="usr-details">
-                        <div class="username">Abhijit Patel</div>
-                        Table 4
-                    </div>
-                </div>
-                <div class="order-item vertical-center-margin">
-                    <a>Tea</a>
-                </div>
-                <div class="time vertical-center-margin">
-                    10:25
-                </div>
-                <div class="status">
-                    <div class="status-pend vertical-center-margin">
-                        Pending
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div id="popup2" class="overlay">
-            <div class="popup">
-                <a class="close" href="#">&times;</a>
-                <div class="popup-content">
-                    <h3>Order summary</h3>
-                    <ul class="order-list">
-                        <li class="cart-item">
-                            <img class="cart-item-img"
-                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                            <span class="cart-item-title">Tea</span>
-                            <span class="order-qty">
-                                    <label class="qty-label">Qty:</label>
-                                    <input class="qty-number" value="1"/>
-                                </span>
-                            <button class="delete-cart-item pend-btns">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </li>
-                        <li class="cart-item">
-                            <img class="cart-item-img"
-                                 src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                            <span class="cart-item-title">Coffee</span>
-                            <span class="order-qty">
-                                    <label class="qty-label">Qty:</label>
-                                    <input class="qty-number" value="1"/>
-                                </span>
-                            <button class="delete-cart-item pend-btns">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </li>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
                     </ul>
-                    <button class="place-order-btn">
-                        <div>Place Order</div>
-                    </button>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="order pending">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
+                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
+                </div>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                    </ul>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="order pending">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
+                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
+                </div>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                    </ul>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="order completed">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
+                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
+                </div>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                    </ul>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed" selected>Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="order pending">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
+                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
+                </div>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                    </ul>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="order pending">
+                <div class="usr-block">
+                    <div class="user-details">
+                        <label class="username">Abhijit Patel</label>
+                        <label class="user-table">Table: 9</label>
+                    </div>
+                    <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
+                </div>
+                <div class="order-details">
+                    <ul class="order-items"><label class="order-label">Order:</label>
+                        <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
+                        <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+                    </ul>
+                    <div class="order-time-status"><div class="order-time">20:10</div>
+                        <select class="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

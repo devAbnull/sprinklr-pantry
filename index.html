@@ -5,7 +5,8 @@
 </head>
 <body>
     <header>
-        <div class="main-header">Sprinklr Pantry
+        <div class="main-header"><img class="logo" src="https://media.glassdoor.com/sqll/427532/sprinklr-squarelogo-1461344438537.png" />
+            Sprinklr Pantry
         <label class="user-name">Hi, Abhijit</label>
         <a class="btn cart-icon show-cart" href="#popup1">
 
@@ -15,15 +16,13 @@
         </div>
         <div class="categories-nav">
             <ul class="categories-list">
+                <li class="category-blck"><a>All</a></li>
                 <li class="category-blck"><a>Beverages</a></li>
                 <li class="category-blck"><a>Cold drinks</a></li>
                 <li class="category-blck"><a>Juices</a></li>
                 <li class="category-blck"><a>Fruits</a></li>
                 <li class="category-blck"><a>Snacks</a></li>
             </ul>
-            <div class="pending-order-list">
-                <a class="category-blck">Pending Orders</a>
-            </div>
         </div>
 
     </header>
@@ -174,11 +173,12 @@
 
         </div>
         <div class="width-30">
+            <div class="pending-order-list">
             <h2>Pending</h2>
             <ul class="item-list">
                 <li class="item-pend-card">
                     <div class="item-pend-heading">
-                        <div class="item-pend-title">Tea +2 items</div>
+                        <div class="item-pend-title">Tea <label class="plus-qty-label">+2 items</label></div>
                         <div class="item-pend-time">10:10</div>
                         <button class="update-item pend-btns">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -236,6 +236,56 @@
                 </li>
 
             </ul>
+            </div>
+            <div class="order-completed-list">
+            <h2>Order History</h2>
+            <ul class="item-list">
+                <li class="item-pend-card">
+                    <div class="item-pend-heading">
+                        <div class="item-pend-title">Tea <label class="plus-qty-label">+2 items</label></div>
+                        <div class="item-pend-time">10:10</div>
+                        <button class="reorder-btn">Reorder</button>
+                    </div>
+                    <div class="item-pend-content">
+                        <ul class="items">
+                            <li class="item-name">Coffee <span class="item-qty">2</span>
+                            </li>
+                            <li class="item-name">Tea <span class="item-qty">1</span>
+                            </li>
+                            <li class="item-name">Biscuits <span class="item-qty">2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="item-pend-card">
+                    <div class="item-pend-heading">
+                        <div class="item-pend-title">Coffee</div>
+                        <div class="item-pend-time">10:10</div>
+                        <button class="reorder-btn">Reorder</button>
+                    </div>
+                    <div class="item-pend-content">
+                        <ul class="items">
+                            <li class="item-name">Coffee <span class="item-qty">2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="item-pend-card">
+                    <div class="item-pend-heading">
+                        <div class="item-pend-title">Coffee</div>
+                        <div class="item-pend-time">10:10</div>
+                        <button class="reorder-btn">Reorder</button>
+                    </div>
+                    <div class="item-pend-content">
+                        <ul class="items">
+                            <li class="item-name">Coffee <span class="item-qty">2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+            </div>
         </div>
     </div>
     <div id="popup1" class="overlay">
@@ -281,6 +331,7 @@
                         </button>
                     </li>
                 </ul>
+                <button class="add-new-item-btn">Add new items</button>
                 <button class="place-order-btn">
                     <div>Place Order</div>
                 </button>

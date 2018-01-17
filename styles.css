@@ -2,7 +2,7 @@
     background-color: #488dd8;
     color: #fff;
     padding: 10px 4%;
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
     position: fixed;
     min-width: auto;
@@ -10,6 +10,13 @@
     top: 0;
     left: 0;
     width: 92%;
+}
+
+.logo{
+    width: 30px;
+    height: 30px;
+    float: left;
+
 }
 
 .categories-nav {
@@ -27,11 +34,11 @@ body {
     margin: 0;
 }
 
-.av-items-header {
-    display: inline-block;
+.fa {
+    cursor: pointer;
 }
 
-.fa {
+button{
     cursor: pointer;
 }
 
@@ -58,13 +65,9 @@ button:focus {
     cursor: pointer;
 }
 
-.pending-order-list {
-    float: right;
-}
-
 .overlay {
     position: fixed;
-    top: 70px;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -103,13 +106,39 @@ button:focus {
     margin: 0 15px;
     border-radius: 3px;
     padding: 0 10px;
+    height: 705px;
+    overflow-y: scroll;
 }
 
 .width-30 {
     width: 24%;
     display: inline-block;
+}
+
+.order-completed-list {
+    margin: 5px 0;
+}
+
+.order-completed-list, .pending-order-list {
+    float: right;
     background-color: #fff;
     border-radius: 3px;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.order-completed-list .item-pend-title {
+    width: 45%;
+}
+
+.reorder-btn {
+    border: none;
+    font-size: 14px;
+    background: #3c763d;
+    color: #fff;
+    border-radius: 4px;
+    padding: 3px 9px;
+    margin-left: 5px;
 }
 
 .categories-btn {
@@ -147,6 +176,7 @@ button:focus {
     display: block;
     padding: 7px 15px 5px 12px;
     text-align: left;
+    cursor: pointer;
 }
 
 .category-blck:hover {
@@ -302,6 +332,10 @@ button:focus {
     margin-top: 5px;
 }
 
+.item-pend-heading:hover .plus-qty-label {
+    display: none;
+}
+
 .items {
     padding: 0;
     margin-top:2px;
@@ -325,7 +359,8 @@ button:focus {
 }
 
 h2 {
-    margin-left: 15px;
+    margin: 12px 15px 5px 15px;
+
 }
 
 ul{
@@ -362,66 +397,6 @@ ul{
 .ordered-by{
     width: 35%;
     float: left;
-}
-
-.vertical-center-margin {
-    margin: 37px 0;
-}
-
-
-.admin-pg-qty{
-    width: 10%;
-    float: left;
-}
-
-.time {
-    width: 10%;
-    float: left;
-    text-align: center;
-}
-
-.status {
-    width: 25%;
-    float: left;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-}
-
-.usr-img {
-    width: 80px;
-    height: 80px;
-    margin: 10px;
-    float: left;
-    border-radius: 50px;
-    background-image: url("https://image.flaticon.com/icons/svg/17/17004.svg") ;
-    background-size: cover;
-}
-
-.usr-details {
-    margin: 30px 10px;
-    float: left;
-}
-
-.username {
-    font-size: 20px;
-}
-
-.status-btn {
-    width: 73%;
-    height: 30px;
-    font-size: 17px;
-    margin: 30px 0 2px 0;
-    color: #fff;
-    border: none;
-}
-
-.status-pend {
-    color: #31708f;
-}
-
-.status-complete {
-    color: #3c763d;
 }
 
 .show-cart {
@@ -465,7 +440,6 @@ ul{
 
 .qty-label {
     float: left;
-    margin-right: 0 5px 0 14px;
 }
 
 .qty-icon {
@@ -496,15 +470,24 @@ ul{
     text-decoration: none;
 }
 
-.place-order-btn{
+.place-order-btn, .add-new-item-btn {
     float: right;
-    /* margin: 10px 0; */
-    width: 100px;
+    width: fit-content;
     height: 30px;
     font-size: 14px;
     border-radius: 3px;
-    background-color: #2a6592;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.add-new-item-btn {
+    background-color: #2a6592;;
+}
+
+.place-order-btn{
+
+    background-color: #3c763d;
 }
