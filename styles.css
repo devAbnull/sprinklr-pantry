@@ -39,6 +39,10 @@ body {
     cursor: pointer;
 }
 
+.fa-pencil {
+    color: #333;
+}
+
 button{
     cursor: pointer;
 }
