@@ -57,7 +57,10 @@ button:focus {
     font-size: 17px;
     padding-top: 10px;
     margin-left: 20px;
+    text-decoration: none;
+    color: #fff;
 }
+
 
 .overlay {
     position: fixed;
@@ -506,4 +509,34 @@ ul{
 
 .cancel-order-btn {
     background-color: #cb202d;
+}
+
+.profile-heading {
+    margin-bottom: 10px;
+}
+
+.usr-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    margin-left: 29%;
+    margin-bottom: 10px;
+}
+
+.user-details-update {
+    width: fit-content;
+}
+
+.user-name-txt, .user-name-table{
+    /*width: 0px;*/
+    max-width: 100%;
+    margin: 5px 10px;
+    background-color: #fafbfc;
+    font-size: 16px;
+}
+
+.update-name-blck, .update-table-blck{
+    width: 100%;
+    margin: 10px 0;
+    font-size: 16px;
 }
