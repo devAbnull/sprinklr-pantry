@@ -113,14 +113,14 @@ button:focus {
 }
 
 .order-completed-list {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .order-completed-list, .pending-order-list {
     float: right;
     background-color: #fff;
     border-radius: 3px;
-    height: 357px;
+    height: 355px;
     overflow-y: scroll;
 }
 
