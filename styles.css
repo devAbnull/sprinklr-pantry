@@ -86,13 +86,13 @@ button:focus {
 }
 
 .popup {
-    margin: 70px auto;
     padding: 10px 20px;
     background: #fff;
     border-radius: 5px;
+    top: 20%;
+    left: 30%;
     width: 38%;
-    position: relative;
-    overflow: hidden;
+    position: absolute;
 }
 
 .width-70 {
@@ -155,7 +155,6 @@ button:focus {
 }
 
 .categories-list {
-    z-index: 1;
     padding: 0px 10px;
     color: #333;
     width: 75%;
@@ -193,7 +192,6 @@ button:focus {
     border-radius: 0.25rem;
     box-shadow: 5px 5px 10px -5px rgba(0,0,0,0.25);
     display: block;
-    overflow: hidden;
 }
 
 .item-img-block {
@@ -293,7 +291,6 @@ button:focus {
 }
 
 .item-pend-card {
-    overflow: hidden;
     margin: 2.5px 0;
     padding: 11px 10px 11px 15px;
     width: 95%;
@@ -307,14 +304,12 @@ button:focus {
 }
 .item-pend-heading{
     width: 100%;
-    overflow: hidden;
 }
 
 .item-pend-content{
     width: 100%;
     max-height: fit-content;
     overflow: hidden;
-    /*visibility: hidden;*/
     display: none;
 }
 
@@ -426,13 +421,11 @@ ul{
     cursor: pointer;
 }
 
-.popup-content {
-    max-height: 50px;
-}
-
 .order-list {
     display: block;
     padding: 0;
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
 .cart-item {
