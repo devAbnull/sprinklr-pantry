@@ -7,7 +7,7 @@
     <header>
         <div class="main-header"><img class="logo" alt="no image to dislpay" src="https://media.glassdoor.com/sqll/427532/sprinklr-squarelogo-1461344438537.png" />
             Sprinklr Pantry
-        <a class="user-name" href="#popup3">Hi, Abhijit</a>
+        <a class="user-name" href="#profile-popup">Hi, Abhijit</a>
         </div>
         <div class="categories-nav">
             <ul class="categories-list">
@@ -18,7 +18,7 @@
                 <li class="category-blck"><a>Fruits</a></li>
                 <li class="category-blck"><a>Snacks</a></li>
             </ul>
-            <a class="btn cart-icon show-cart" href="#popup1">
+            <a class="btn cart-icon show-cart" href="#cart-popup">
                 <i class="fa fa-shopping-cart show-cart-icon" aria-hidden="true"></i><label class="cart-label">Cart(2)</label>
             </a>
         </div>
@@ -234,7 +234,7 @@
                         <div class="item-pend-title">Tea <label class="plus-qty-label">+2 items</label></div>
                         <div class="item-pend-time">10:10</div>
                         <button class="update-item pend-btns">
-                            <a  href="#popup2"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a  href="#order-popup"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         </button>
                         <button class="delete-item pend-btns">
                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -403,7 +403,7 @@
             </div>
         </div>
     </div>
-    <div id="popup1" class="overlay">
+    <div id="cart-popup" class="overlay">
         <div class="popup">
             <a class="close" href="#">&times;</a>
             <div class="popup-content">
@@ -453,12 +453,30 @@
             </div>
         </div>
     </div>
-    <div id="popup2" class="overlay">
+    <div id="order-popup" class="overlay">
         <div class="popup">
             <a class="close" href="#">&times;</a>
             <div class="popup-content">
                 <h3>Update order</h3>
                 <ul class="order-list">
+                    <li class="cart-item">
+                        <img class="cart-item-img"
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
+                        <span class="cart-item-title">Tea</span>
+                        <span class="order-qty">
+                                    <label class="qty-label">Qty:</label>
+                                    <button class="qty-btns">
+                                        <i class="fa fa-minus qty-icon" aria-hidden="true"></i>
+                                    </button>
+                                    <input class="qty-number" value="1"/>
+                                    <button class="qty-btns">
+                                        <i class="fa fa-plus qty-icon" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                        <button class="delete-cart-item pend-btns">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </li>
                     <li class="cart-item">
                         <img class="cart-item-img"
                              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
@@ -506,7 +524,7 @@
             </div>
         </div>
     </div>
-    <div id="popup3" class="overlay">
+    <div id="profile-popup" class="overlay">
         <div class="popup user-details-update">
             <a class="close" href="#">&times;</a>
             <h3 class="profile-heading">Profile</h3>
