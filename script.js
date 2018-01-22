@@ -93,6 +93,14 @@ function onLoadAdmin() {
     showOrders();
 }
 
+function getOrderFromLocal() {
+    const storedList = localStorage.getItem("orderList");
+    const listOfStr = !!(storedList) ? storedList.split("$") : [];
+    listOfStr.map( (orderStr) => {
+        orderList.push(JSON.parse(orderStr));
+    })
+}
+
 function showCategories() {
     categories.map((category) => {
         const categoryNode = document.createElement("li");
@@ -144,12 +152,14 @@ function showItemsList(listToShow) {
 }
 
 function showOrders() {
-    let sortedOrder = orderList.sort(function (order1, order2) { return order1.timestamp <= order2.timestamp })
+    getOrderFromLocal();
+    let sortedOrder = orderList.sort(function (order1, order2) { return order1.timestamp > order2.timestamp })
     console.log(orderList)
     sortedOrder.map((order) => {
         const itemsInOrder = order.items;
         const items = Object.keys(itemsInOrder);
         const orderNode = document.createElement("li");
+        date = new Date(order.timestamp)
 
         orderNode.setAttribute("class", `order ${order.status}`);
 
@@ -157,7 +167,7 @@ function showOrders() {
         <div class="usr-block">
             <div class="user-details">
                 <label class="username">${order.user.name}</label>
-                <label class="user-table">${order.user.tableNo}</label>
+                <label class="user-table">Table: ${order.user.tableNo}</label>
             </div>
             <img class="usr-img" alt="no image to dislpay" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
         </div>
@@ -166,11 +176,9 @@ function showOrders() {
             ${items.map(
                 itemName => {
                     return `<li class="item-detail"><label class="item-name">${listItems[itemName].name}</label><label class="item-qty">${itemsInOrder[itemName].qty}</label></li>`
-            })}
-                <li class="item-detail"><label class="item-name">Coffee</label><label class="item-qty">1</label></li>
-                <li class="item-detail"><label class="item-name">Good day</label><label class="item-qty">1</label></li>
+            }).join("")}
             </ul>
-            <div class="order-time-status"><div class="order-time">20:10</div>
+            <div class="order-time-status"><div class="order-time">${date.getHours() +":"+ date.getMinutes()}</div>
                 <select class="order-status">
                     <option value="pending">Pending</option>
                     <option value="completed">Completed</option>
@@ -184,6 +192,9 @@ function showOrders() {
 }
 
 function showPendingOrders() {
+    getOrderFromLocal();
+    console.log(orderList);
+    if(!orderList) return;
     pendingOrderList = orderList.filter((order) => {
         return order.status === "pending";
     })
@@ -198,6 +209,7 @@ function updatePendingOrder(order) {
     const itemsInOrder = order.items;
     const items = Object.keys(itemsInOrder);
     date = new Date(order.timestamp)
+
     console.log(itemsInOrder[1])
     orderNode.setAttribute("id",`pend-order${order.orderid}`);
     orderNode.setAttribute("class", "item-pend-card");
@@ -271,10 +283,17 @@ function addToOrderList(itemsToOrder) {
         status: "pending",
         user: userDetails
     }
+    let dataToStore = [];
+
     orderList.push(order);
     orderNo++;
     location.href = "#";
     updatePendingOrder(order);
+
+    orderList.map( (order) => {
+        dataToStore.push(JSON.stringify(order));
+    } )
+    localStorage.setItem("orderList", dataToStore.join("$"));
 }
 
 function quickOrder(itemName) {

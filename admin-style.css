@@ -24,6 +24,8 @@ ul {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    height: 700px;
+    overflow: auto;
 }
 
 .order {
