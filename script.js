@@ -71,7 +71,7 @@ let orderList = [];
 
 let orderNo = 0;
 let cartQty=0;
-const date = new Date();
+let date = null;
 let categoryLive = "all";
 let userDetails = {
     "name" : "Abhijit",
@@ -98,7 +98,7 @@ function showCategories() {
         const categoryNode = document.createElement("li");
 
         categoryNode.setAttribute("id",category);
-        const state = (category==categoryLive)?"select":"unselect";
+        const state = (category === categoryLive)?"select":"unselect";
         categoryNode.setAttribute("class", `category-blck ${state}`);
         categoryNode.setAttribute("accesskey", category);
         categoryNode.innerHTML = `<a accesskey=${category}>${category}</a>`;
@@ -185,7 +185,7 @@ function showOrders() {
 
 function showPendingOrders() {
     pendingOrderList = orderList.filter((order) => {
-        return order.status == "pending";
+        return order.status === "pending";
     })
 
     pendingOrderList.map((order) => {
@@ -197,6 +197,7 @@ function updatePendingOrder(order) {
     const orderNode = document.createElement("li");
     const itemsInOrder = order.items;
     const items = Object.keys(itemsInOrder);
+    date = new Date(order.timestamp)
     console.log(itemsInOrder[1])
     orderNode.setAttribute("id",`pend-order${order.orderid}`);
     orderNode.setAttribute("class", "item-pend-card");
@@ -206,7 +207,7 @@ function updatePendingOrder(order) {
     orderNode.innerHTML = `
          <div class="item-pend-heading">
             <div class="item-pend-title">${listItems[items[0]].name}<label class="plus-qty-label ${nonZeroFlg}"> +${items.length-1}</label></div>
-            <div class="item-pend-time">${date.getHours(order.timestamp) +":"+ date.getMinutes(order.timestamp)}</div>
+            <div class="item-pend-time">${date.getHours() +":"+ date.getMinutes()}</div>
             <button class="delete-item pend-btns">
                 <i class="fa fa-trash" aria-hidden="true" onclick={deletePendingOrder(${order.orderid})}></i>
             </button>
@@ -263,7 +264,13 @@ function updateCounter(){
 }
 
 function addToOrderList(itemsToOrder) {
-    const order = {orderid: orderNo, items: itemsToOrder, timestamp: date.getTime(), status: "pending", user: userDetails}
+    const order = {
+        orderid: orderNo,
+        items: itemsToOrder,
+        timestamp: Date.now(),
+        status: "pending",
+        user: userDetails
+    }
     orderList.push(order);
     orderNo++;
     location.href = "#";
@@ -305,14 +312,13 @@ function deleteCartItem(itemName) {
 
 function deletePendingOrder(orderid) {
     delete orderList[orderid];
-    console.log(orderList);
     const nodeToDel = document.getElementById(`pend-order${orderid}`);
     pendingListNode.removeChild(nodeToDel)
 }
 
 function categoryChanged(event) {
     const newCategory = event.target.accessKey;
-    if(newCategory == categoryLive) return;
+    if(newCategory === categoryLive) return;
 
     const categoryToSelect  = document.getElementById(newCategory);
     const categoryToUnselect = document.getElementById(categoryLive);
@@ -324,7 +330,7 @@ function categoryChanged(event) {
     categoryLive= newCategory;
     if(newCategory != "all") {
             filteredList = Object.keys(listItems).filter((item) => {
-                return listItems[item].category == categoryLive;
+                return listItems[item].category === categoryLive;
         })
 
             filteredList.map((item) => {
