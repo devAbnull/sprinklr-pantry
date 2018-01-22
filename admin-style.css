@@ -16,7 +16,7 @@ ul {
     list-style-type: none;
 }
 
-.order-list {
+#admin-order-list {
     position: fixed;
     top: 60px;
     width: 90%;

@@ -1,13 +1,14 @@
 <html>
     <head>
         <link rel="stylesheet" href="admin-style.css" >
+        <script type="text/javascript" src="script.js"></script>
     </head>
-    <body>
+    <body onload={onLoadAdmin()}>
         <header class="main-header">
             Sprinklr Pantry
         </header>
-        <div class="order-list">
-            <div class="order pending">
+        <ul id="admin-order-list">
+            <li class="order pending">
                 <div class="usr-block">
                     <div class="user-details">
                         <label class="username">Abhijit Patel</label>
@@ -28,7 +29,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </li>
             <div class="order pending">
                 <div class="usr-block">
                     <div class="user-details">
@@ -139,6 +140,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </ul>
     </body>
 </html>

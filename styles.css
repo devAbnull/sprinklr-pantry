@@ -91,8 +91,9 @@ button:focus {
     border-radius: 5px;
     top: 20%;
     left: 30%;
-    width: 38%;
+    width: 42%;
     position: absolute;
+    max-width: 430px;
 }
 
 .width-70 {
@@ -154,7 +155,7 @@ button:focus {
     position: relative;
 }
 
-.categories-list {
+#categories-list {
     padding: 0px 10px;
     color: #333;
     width: 75%;
@@ -173,9 +174,14 @@ button:focus {
     text-align: left;
     cursor: pointer;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
-.category-blck:hover {
+.category-blck.unselect {
+    background-color: #fff;
+}
+
+.category-blck.select {
     text-decoration: none;
     color: #262626;
     background-color: #eee;
@@ -249,6 +255,7 @@ button:focus {
     float: left;
     width: 93%;
     text-align: center;
+    text-transform: capitalize;
 }
 
 .item-title {
@@ -280,13 +287,13 @@ button:focus {
 }
 
 
-.item-list {
+#item-list {
     padding: 0px;
     margin-top: 0;
 }
 
 .item-name {
-    width: 30%;
+    width: 80%;
     display: inline-block;
 }
 
@@ -328,6 +335,10 @@ button:focus {
 }
 
 .item-pend-heading:hover .plus-qty-label {
+    display: none;
+}
+
+.non-zero-flg {
     display: none;
 }
 
@@ -397,7 +408,7 @@ ul{
 .show-cart {
     float: right;
     background-color: transparent;
-    width: 85px;
+    width: 95px;
     height: 100%;
     color:  #3c763d;
     border-radius: 0;
@@ -421,7 +432,7 @@ ul{
     cursor: pointer;
 }
 
-.order-list {
+#order-list {
     display: block;
     padding: 0;
     max-height: 200px;
@@ -445,7 +456,7 @@ ul{
 
 .cart-item-title {
     float: left;
-    width: 30%;
+    width: 38%;
     text-align: center;
 }
 
@@ -461,7 +472,7 @@ ul{
     font-size: 14px;
     margin: 0 5px;
     float: left;
-    width: 20px;
+    width: 35px;
     height: 20px;
 }
 

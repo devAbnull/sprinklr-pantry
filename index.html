@@ -4,224 +4,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body onload={onLoadFunction()}>
     <header>
         <div class="main-header"><img class="logo" alt="no image to dislpay" src="https://media.glassdoor.com/sqll/427532/sprinklr-squarelogo-1461344438537.png" />
             Sprinklr Pantry
         <a class="user-name" href="#profile-popup">Hi, Abhijit</a>
         </div>
         <div class="categories-nav">
-            <ul class="categories-list">
-                <li class="category-blck"><a>All</a></li>
-                <li class="category-blck"><a>Beverages</a></li>
-                <li class="category-blck"><a>XYZ</a></li>
-                <li class="category-blck"><a>ABC</a></li>
-                <li class="category-blck"><a>Fruits</a></li>
-                <li class="category-blck"><a>Snacks</a></li>
+            <ul id="categories-list">
             </ul>
             <a class="btn cart-icon show-cart" href="#cart-popup">
-                <i class="fa fa-shopping-cart show-cart-icon" aria-hidden="true"></i><label class="cart-label">Cart(2)</label>
+                <i class="fa fa-shopping-cart show-cart-icon" aria-hidden="true"></i><label class="cart-label">Cart(<span id="cart-qty">0</span>)</label>
             </a>
         </div>
 
     </header>
     <div class="content">
         <div class="width-70">
-            <ul class="item-list">
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay"
-                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Tea
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay" src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Coffee
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Tea
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay" src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Coffee
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay"
-                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Tea
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay" src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Coffee
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay"
-                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Tea
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-
-                </li>
-                <li class="item-card">
-                    <div class="item-img-block">
-                        <img class="item-img" alt="no image to dislpay" src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                        <div class="overlay-img">
-                            <div class="add-cart">
-                                <button class="add-cart-icon">
-                                    <div>Add to cart</div>
-                                </button>
-                                <button class="add-cart-icon">
-                                    <div>Order Now</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">
-                            Coffee
-                        </div>
-                        <div class="item-category">
-                            Beverages
-                        </div>
-                    </div>
-                </li>
+            <ul id="item-list">
 
             </ul>
 
@@ -229,7 +29,7 @@
         <div class="width-30">
             <div class="pending-order-list">
             <h2>Pending</h2>
-            <ul class="item-list">
+            <ul id="pending-order-list" class="item-list">
                 <li class="item-pend-card">
                     <div class="item-pend-heading">
                         <div class="item-pend-title">Tea <label class="plus-qty-label">+2 items</label></div>
@@ -409,46 +209,10 @@
             <a class="close" href="#">&times;</a>
             <div class="popup-content">
                 <h3>Order summary</h3>
-                <ul class="order-list">
-                    <li class="cart-item">
-                        <img class="cart-item-img"
-                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mug_of_Tea.JPG/1200px-Mug_of_Tea.JPG"/>
-                        <span class="cart-item-title">Tea</span>
-                        <span class="order-qty">
-                                    <label class="qty-label">Qty:</label>
-                                    <button class="qty-btns">
-                                        <i class="fa fa-minus qty-icon" aria-hidden="true"></i>
-                                    </button>
-                                    <input class="qty-number" value="1"/>
-                                    <button class="qty-btns">
-                                        <i class="fa fa-plus qty-icon" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                        <button class="delete-cart-item pend-btns">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    </li>
-                    <li class="cart-item">
-                        <img class="cart-item-img"
-                             src="http://www.todayifoundout.com/wp-content/uploads/2014/01/coffee3.jpg"/>
-                        <span class="cart-item-title">Coffee</span>
-                        <span class="order-qty">
-                                    <label class="qty-label">Qty:</label>
-                                    <button class="qty-btns">
-                                        <i class="fa fa-minus qty-icon" aria-hidden="true"></i>
-                                    </button>
-                                    <input class="qty-number" value="1"/>
-                                    <button class="qty-btns">
-                                        <i class="fa fa-plus qty-icon" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                        <button class="delete-cart-item pend-btns">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    </li>
+                <ul id="order-list">
                 </ul>
-                <button class="add-new-item-btn">Add new items</button>
-                <button class="place-order-btn">
+                <button class="add-new-item-btn" onclick={location.href="#"}>Add new items</button>
+                <button class="place-order-btn" onclick={addNewOrder()} >
                     <div>Place Order</div>
                 </button>
             </div>
@@ -542,5 +306,6 @@
             </table>
         </div>
     </div>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
