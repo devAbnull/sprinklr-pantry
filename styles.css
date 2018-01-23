@@ -118,27 +118,39 @@ button:focus {
     margin: 10px 0;
 }
 
-.order-completed-list, .pending-order-list {
+.order-completed-list-blck, .pending-order-list-blck {
     float: right;
     background-color: #fff;
     border-radius: 3px;
     height: 355px;
     overflow-y: scroll;
     width: 100%;
+    margin-bottom: 10px;
+}
+
+#pending-order-list, #order-completed-list {
+    padding: 0;
 }
 
 .order-completed-list .item-pend-title {
     width: 45%;
 }
 
-.reorder-btn {
+.order-list-btn {
     border: none;
     font-size: 14px;
-    background: #3c763d;
     color: #fff;
     border-radius: 4px;
     padding: 3px 9px;
     float: right;
+}
+
+.reorder-btn {
+    background: #3c763d;
+}
+
+.delete-btn {
+    background-color: #cb202d;
 }
 
 .reorder-btn:hover {
@@ -205,6 +217,8 @@ button:focus {
 .item-img-block {
     position: relative;
     border-radius: 0.25rem;
+    height: 200px;
+    display: flex;
 }
 
 .item-img {
@@ -214,7 +228,8 @@ button:focus {
     border-radius: 0.25rem;
     overflow: hidden;
     position: relative;
-    height: 200px;
+    margin: auto 0;
+    max-height: 200px;
     width: 100%;
 }
 
@@ -306,13 +321,14 @@ button:focus {
     border-bottom: 1px solid #eee;
 }
 
-.item-pend-title {
-    font-size: 18px;
+.pend-content {
+    width: 60%;
     float: left;
-    width: 55%;
 }
-.item-pend-heading{
-    width: 100%;
+
+.time-remove {
+    width: 40%; ;
+    float: left;
 }
 
 .item-pend-content{
@@ -333,7 +349,7 @@ button:focus {
 
 .item-pend-content:hover {
     display: block;
-    transition: 0.5s;
+    /*transition: 0.5s;*/
 }
 
 .item-pend-heading:hover .plus-qty-label {
@@ -426,6 +442,7 @@ ul{
 .show-cart-icon, .cart-label {
     float: left;
     margin-top: 5px;
+    width: 25%;
 }
 
 .cart-label {

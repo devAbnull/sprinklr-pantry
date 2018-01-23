@@ -90,15 +90,26 @@ function onLoadFunction() {
 
 function onLoadAdmin() {
     orderListNode = document.getElementById("admin-order-list");
+    // setInterval(showOrders, 1000)
     showOrders();
 }
 
 function getOrderFromLocal() {
     const storedList = localStorage.getItem("orderList");
     const listOfStr = !!(storedList) ? storedList.split("$") : [];
+    orderList= []
     listOfStr.map( (orderStr) => {
         orderList.push(JSON.parse(orderStr));
     })
+    orderNo = orderList.length;
+}
+
+function writeToLocal() {
+    let dataToStore = [];
+    orderList.map( (order) => {
+            dataToStore.push(JSON.stringify(order));
+    } )
+    localStorage.setItem("orderList", dataToStore.join("$"));
 }
 
 function showCategories() {
@@ -154,15 +165,36 @@ function showItemsList(listToShow) {
 function showOrders() {
     getOrderFromLocal();
     let sortedOrder = orderList.sort(function (order1, order2) { return order1.timestamp > order2.timestamp })
-    console.log(orderList)
-    sortedOrder.map((order) => {
+    // console.log(orderList)
+    sortedOrder.forEach((order) => {
+        let statusSel;
+        let chkOrderId = 0;
+        // orderList.map( (order)=>{
+        //     console.log("checkorderid",chkOrderId);
+        //     if(chkOrderId !== order.orderid && chkOrderId<orderList.length){
+        //         const orderDel = document.getElementById(`order-${order.orderid}`);
+        //         console.log("missing order",order.orderid);
+        //         if(orderDel) orderListNode.removeChild(orderDel);
+        //     }
+        //
+        //     chkOrderId++;
+        // } )
+        const chkOrder = document.getElementById(`order-${order.orderid}`);
+        if(!!chkOrder) return;
+
+
+
         const itemsInOrder = order.items;
         const items = Object.keys(itemsInOrder);
         const orderNode = document.createElement("li");
+        debugger;
+        const complSel = (order.status == "completed")? "selected" : "";
+        const pendSel = (order.status == "completed")? "selected" : "";
+        const rejSel = (order.status == "rejected")?"selected":"";
         date = new Date(order.timestamp)
 
         orderNode.setAttribute("class", `order ${order.status}`);
-
+        orderNode.setAttribute("id", `order-${order.orderid}`);
         orderNode.innerHTML = `
         <div class="usr-block">
             <div class="user-details">
@@ -175,14 +207,15 @@ function showOrders() {
             <ul class="order-items"><label class="order-label">Order:</label>
             ${items.map(
                 itemName => {
+                    console.log(itemName)
                     return `<li class="item-detail"><label class="item-name">${listItems[itemName].name}</label><label class="item-qty">${itemsInOrder[itemName].qty}</label></li>`
             }).join("")}
             </ul>
             <div class="order-time-status"><div class="order-time">${date.getHours() +":"+ date.getMinutes()}</div>
-                <select class="order-status">
-                    <option value="pending">Pending</option>
-                    <option value="completed">Completed</option>
-                    <option value="rejected">Rejected</option>
+                <select class="order-status" id="status-sel-${order.orderid}" onchange={selectionChanged(${order.orderid})}>
+                    <option value="pending" ${pendSel}>Pending</option>
+                    <option value="completed" ${complSel}>Completed</option>
+                    <option value="rejected" ${rejSel}>Rejected</option>
                 </select>
             </div>
         </div>`
@@ -217,22 +250,17 @@ function updatePendingOrder(order) {
 
     nonZeroFlg = (items.length===1)? "non-zero-flg" :"";
     orderNode.innerHTML = `
-         <div class="item-pend-heading">
-            <div class="item-pend-title">${listItems[items[0]].name}<label class="plus-qty-label ${nonZeroFlg}"> +${items.length-1}</label></div>
-            <div class="item-pend-time">${date.getHours() +":"+ date.getMinutes()}</div>
-            <button class="delete-item pend-btns">
-                <i class="fa fa-trash" aria-hidden="true" onclick={deletePendingOrder(${order.orderid})}></i>
-            </button>
-        </div>
-        <div class="item-pend-content">
+         <div class="pend-content">
             <ul class="items">
-                ${items.map(
-        itemName => {
-            return  `<li class="item-name">${listItems[itemName].name}<span class="item-qty">  ${itemsInOrder[itemName].qty}</span></li>`
-        }
-        )}
+                ${items.map(itemName => {
+                return `<li class="item-name">${listItems[itemName].name}<span class="item-qty"> ${itemsInOrder[itemName].qty}</span></li>`
+                }).join("")}
             </ul>
-        </div>`
+         </div>
+         <div class="time-remove">
+            ${date.getHours() +":"+ date.getMinutes()}
+            <button class="order-list-btn delete-btn" onclick={deletePendingOrder(${order.orderid})}>Delete</button>
+         </div>`
 
     if (pendingListNode.childElementCount === 0)
         pendingListNode.appendChild(orderNode) ;
@@ -283,17 +311,14 @@ function addToOrderList(itemsToOrder) {
         status: "pending",
         user: userDetails
     }
-    let dataToStore = [];
 
     orderList.push(order);
     orderNo++;
+    console.log("order",orderNo);
     location.href = "#";
+    debugger;
     updatePendingOrder(order);
-
-    orderList.map( (order) => {
-        dataToStore.push(JSON.stringify(order));
-    } )
-    localStorage.setItem("orderList", dataToStore.join("$"));
+    writeToLocal();
 }
 
 function quickOrder(itemName) {
@@ -309,12 +334,13 @@ function addNewOrder() {
         cartItemsList[itemName].qty = document.getElementById(`qty-${itemName}`).value;
         // console.log()
     })
+    if(Object.keys(cartItemsList).length === 0)return;
     addToOrderList(cartItemsList);
     clearCart();
 }
 
 function clearCart() {
-    cartItemsList = [];
+    cartItemsList = {};
     cartListNode.innerHTML="";
     cartQty=-1;
     updateCounter();
@@ -333,6 +359,7 @@ function deletePendingOrder(orderid) {
     delete orderList[orderid];
     const nodeToDel = document.getElementById(`pend-order${orderid}`);
     pendingListNode.removeChild(nodeToDel)
+    writeToLocal();
 }
 
 function categoryChanged(event) {
@@ -362,4 +389,13 @@ function categoryChanged(event) {
     console.log(listToShow);
     itemsListNode.innerHTML = "";
     showItemsList(listToShow);
+}
+
+function selectionChanged(orderId) {
+    const orderNode = document.getElementById(`order-${orderId}`);
+    const selectionNode = document.getElementById(`status-sel-${orderId}`);
+    const status = selectionNode.value;
+    orderList[orderId].status = status;
+    orderNode.setAttribute("class", `order ${status}`)
+    writeToLocal();
 }

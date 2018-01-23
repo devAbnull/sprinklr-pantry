@@ -16,16 +16,19 @@ ul {
     list-style-type: none;
 }
 
-#admin-order-list {
+main {
+    height: 700px;
+    top: 50px;
     position: fixed;
-    top: 60px;
     width: 90%;
     padding: 10px 5%;
+}
+
+#admin-order-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    height: 700px;
     overflow: auto;
+    padding: 0;
 }
 
 .order {
