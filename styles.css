@@ -143,13 +143,18 @@ button:focus {
     border-radius: 4px;
     padding: 3px 9px;
     float: right;
+    margin: 0 5px;
 }
 
-.reorder-btn {
+.reorder-btn, .save-btn {
     background: #3c763d;
 }
 
-.delete-btn {
+.save-btn {
+    margin-right: 12px;
+}
+
+.delete-btn, .cancel-btn {
     background-color: #cb202d;
 }
 
@@ -225,7 +230,6 @@ button:focus {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0.25rem;
     overflow: hidden;
     position: relative;
     margin: auto 0;
@@ -279,11 +283,17 @@ button:focus {
     font-weight: bold;
     font-size: 18px;
     margin: 5px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .item-category {
     margin-bottom: 8px;
     color: #444;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .item-card:hover .add-cart {
@@ -312,6 +322,14 @@ button:focus {
 .item-name {
     width: 80%;
     display: inline-block;
+}
+
+.item-name-only {
+    width: 90%;
+    float: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .item-pend-card {
@@ -426,7 +444,7 @@ ul{
 .show-cart {
     float: right;
     background-color: transparent;
-    width: 95px;
+    width: fit-content;
     height: 100%;
     color:  #3c763d;
     border-radius: 0;

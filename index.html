@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onload={onLoadFunction()}>
+<body>
     <header>
         <div class="main-header"><img class="logo" alt="no image to dislpay" src="https://media.glassdoor.com/sqll/427532/sprinklr-squarelogo-1461344438537.png" />
             Sprinklr Pantry
@@ -36,20 +36,14 @@
             <h2>Order History</h2>
             <ul id="order-completed-list">
                 <li class="item-pend-card">
-                    <div class="item-pend-heading">
-                        <div class="item-pend-title">Tea <label class="plus-qty-label">+2 items</label></div>
-                        <div class="item-pend-time">10:10</div>
-                        <button class="order-list-btn reorder-btn">Reorder</button>
-                    </div>
-                    <div class="item-pend-content">
+                    <div class="pend-content">
                         <ul class="items">
-                            <li class="item-name">Coffee <span class="item-qty">2</span>
-                            </li>
-                            <li class="item-name">Tea <span class="item-qty">1</span>
-                            </li>
-                            <li class="item-name">Biscuits <span class="item-qty">2</span>
-                            </li>
+                            <li class="item-name">Coffee<span class="item-qty"> 1</span></li>
                         </ul>
+                    </div>
+                    <div class="time-remove">
+                        10:10
+                        <button class="order-list-btn reorder-btn" onclick={reOrder(${order.orderid})}>Reorder</button>
                     </div>
                 </li>
             </ul>
@@ -85,7 +79,10 @@
                 <td><input type="number" value="9" class="user-name-table" /></td>
             </tr>
             </table>
+            <button class="order-list-btn save-btn">Save</button>
+            <button class="order-list-btn cancel-btn">Cancel</button>
         </div>
+        <button class="order-list-btn reorder-btn">Reorder</button>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>

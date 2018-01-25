@@ -67,7 +67,7 @@ let categoryListNode = null;
 
 let cartItemsList = {};
 let pendingOrderList = [];
-let orderList = [];
+let orderList = {};
 
 let orderNo = 0;
 let cartQty=0;
@@ -78,15 +78,15 @@ let userDetails = {
     "tableNo": 9
 }
 
-function onLoadFunction() {
-    itemsListNode = document.getElementById("item-list");
-    cartListNode = document.getElementById("order-list");
-    pendingListNode = document.getElementById("pending-order-list");
-    categoryListNode = document.getElementById("categories-list");
-    showItemsList(listItems);
-    showPendingOrders();
-    showCategories();
-}
+// function onLoadFunction() {
+itemsListNode = document.getElementById("item-list");
+cartListNode = document.getElementById("order-list");
+pendingListNode = document.getElementById("pending-order-list");
+categoryListNode = document.getElementById("categories-list");
+showItemsList(listItems);
+showPendingOrders();
+showCategories();
+// }
 
 function onLoadAdmin() {
     orderListNode = document.getElementById("admin-order-list");
@@ -96,24 +96,27 @@ function onLoadAdmin() {
 
 function getOrderFromLocal() {
     const storedList = localStorage.getItem("orderList");
-    const listOfStr = !!(storedList) ? storedList.split("$") : [];
-    orderList= []
-    listOfStr.map( (orderStr) => {
-        orderList.push(JSON.parse(orderStr));
+    const listOfStr = !!(storedList) ? JSON.parse(storedList) : {};
+
+    orderList= {}
+    Object.keys(listOfStr).map( (orderId) => {
+        orderList[orderId] = JSON.parse(listOfStr[orderId]);
     })
-    orderNo = orderList.length;
+    orderNo = localStorage.getItem("orderNo");
 }
 
 function writeToLocal() {
-    let dataToStore = [];
-    orderList.map( (order) => {
-            dataToStore.push(JSON.stringify(order));
+    let dataToStore = {};
+    Object.keys(orderList).map( (orderId) => {
+            let order = orderList[orderId];
+            dataToStore[orderId] = JSON.stringify(order);
     } )
-    localStorage.setItem("orderList", dataToStore.join("$"));
+    localStorage.setItem("orderList", JSON.stringify(dataToStore));
+    localStorage.setItem("orderNo",orderNo);
 }
 
 function showCategories() {
-    categories.map((category) => {
+    categories.forEach((category) => {
         const categoryNode = document.createElement("li");
 
         categoryNode.setAttribute("id",category);
@@ -128,7 +131,6 @@ function showCategories() {
 
 function showItemsList(listToShow) {
     Object.keys(listToShow).map((itemName) => {
-        // console.log(x)
         const item = listToShow[itemName];
         const itemNode = document.createElement("li");
 
@@ -163,12 +165,18 @@ function showItemsList(listToShow) {
 }
 
 function showOrders() {
+    let sortedOrder = {};
+
     getOrderFromLocal();
-    let sortedOrder = orderList.sort(function (order1, order2) { return order1.timestamp > order2.timestamp })
-    // console.log(orderList)
-    sortedOrder.forEach((order) => {
+    sortedOrder = orderList;
+
+    // let sortedOrder = orderList.sort(function (order1, order2) { return order1.timestamp > order2.timestamp })
+
+    Object.keys(sortedOrder).forEach((orderId) => {
         let statusSel;
+        let order = orderList[orderId];
         let chkOrderId = 0;
+        // console.log(orderList.length);
         // orderList.map( (order)=>{
         //     console.log("checkorderid",chkOrderId);
         //     if(chkOrderId !== order.orderid && chkOrderId<orderList.length){
@@ -183,11 +191,9 @@ function showOrders() {
         if(!!chkOrder) return;
 
 
-
         const itemsInOrder = order.items;
         const items = Object.keys(itemsInOrder);
         const orderNode = document.createElement("li");
-        debugger;
         const complSel = (order.status == "completed")? "selected" : "";
         const pendSel = (order.status == "completed")? "selected" : "";
         const rejSel = (order.status == "rejected")?"selected":"";
@@ -226,15 +232,21 @@ function showOrders() {
 
 function showPendingOrders() {
     getOrderFromLocal();
-    console.log(orderList);
     if(!orderList) return;
-    pendingOrderList = orderList.filter((order) => {
-        return order.status === "pending";
+    // debugger
+    pendingOrderList = {};
+    Object.keys(orderList).forEach((orderId) => {
+        let order = orderList[orderId];
+        if(order.status === "pending")
+            pendingOrderList[orderId] = order;
     })
 
-    pendingOrderList.map((order) => {
+    Object.keys(pendingOrderList).forEach((orderId) => {
+        let order = pendingOrderList[order];
         updatePendingOrder(order);
     })
+
+
 }
 
 function updatePendingOrder(order) {
@@ -253,7 +265,7 @@ function updatePendingOrder(order) {
          <div class="pend-content">
             <ul class="items">
                 ${items.map(itemName => {
-                return `<li class="item-name">${listItems[itemName].name}<span class="item-qty"> ${itemsInOrder[itemName].qty}</span></li>`
+                return `<li class="item-name"><div class="item-name-only">${listItems[itemName].name}</div><span class="item-qty"> ${itemsInOrder[itemName].qty}</span></li>`
                 }).join("")}
             </ul>
          </div>
@@ -262,11 +274,42 @@ function updatePendingOrder(order) {
             <button class="order-list-btn delete-btn" onclick={deletePendingOrder(${order.orderid})}>Delete</button>
          </div>`
 
-    if (pendingListNode.childElementCount === 0)
-        pendingListNode.appendChild(orderNode) ;
-    else
-        pendingListNode.insertBefore(orderNode, pendingListNode.childNodes[0]);
+    pendingListNode.appendChild(orderNode);
 }
+
+//
+//
+// function updateCompletedOrder(order) {
+//     const orderNode = document.createElement("li");
+//     const itemsInOrder = order.items;
+//     const items = Object.keys(itemsInOrder);
+//     date = new Date(order.timestamp)
+//
+//     console.log(itemsInOrder[1])
+//     orderNode.setAttribute("id",`pend-order${order.orderid}`);
+//     orderNode.setAttribute("class", "item-pend-card");
+//     console.log(listItems[items[0]].name)
+//
+//     nonZeroFlg = (items.length===1)? "non-zero-flg" :"";
+//     orderNode.innerHTML = `
+//          <div class="pend-content">
+//             <ul class="items">
+//                 ${items.map(itemName => {
+//         return `<li class="item-name">${listItems[itemName].name}<span class="item-qty"> ${itemsInOrder[itemName].qty}</span></li>`
+//     }).join("")}
+//             </ul>
+//          </div>
+//          <div class="time-remove">
+//             ${date.getHours() +":"+ date.getMinutes()}
+//             <button class="order-list-btn reorder-btn" onclick={reOrder(${order.orderid})}>Reorder</button>
+//          </div>`
+//
+//     if (completeListNode.childElementCount === 0)
+//         completeListNode.appendChild(orderNode) ;
+//     else
+//         completeListNode.insertBefore(orderNode, pendingListNode.childNodes[0]);
+// }
+
 
 
 function addToCart(itemName) {
@@ -312,11 +355,11 @@ function addToOrderList(itemsToOrder) {
         user: userDetails
     }
 
-    orderList.push(order);
+    orderList[orderNo] = order;
     orderNo++;
     console.log("order",orderNo);
     location.href = "#";
-    debugger;
+    // debugger;
     updatePendingOrder(order);
     writeToLocal();
 }
@@ -356,6 +399,7 @@ function deleteCartItem(itemName) {
 }
 
 function deletePendingOrder(orderid) {
+    console.log(orderList)
     delete orderList[orderid];
     const nodeToDel = document.getElementById(`pend-order${orderid}`);
     pendingListNode.removeChild(nodeToDel)
