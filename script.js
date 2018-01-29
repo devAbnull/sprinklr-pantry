@@ -86,11 +86,12 @@ categoryListNode = document.getElementById("categories-list");
 showItemsList(listItems);
 showPendingOrders();
 showCategories();
+setInterval(showPendingOrders, 1000)
 // }
 
 function onLoadAdmin() {
     orderListNode = document.getElementById("admin-order-list");
-    // setInterval(showOrders, 1000)
+    setInterval(showOrders, 1000)
     showOrders();
 }
 
@@ -230,8 +231,13 @@ function showOrders() {
     })
 }
 
+function getPendOrderClass(orderid){
+    return `pend-order${orderid}`
+}
+
 function showPendingOrders() {
     getOrderFromLocal();
+    debugger
     if(!orderList) return;
     // debugger
     pendingOrderList = {};
@@ -239,10 +245,17 @@ function showPendingOrders() {
         let order = orderList[orderId];
         if(order.status === "pending")
             pendingOrderList[orderId] = order;
+        else if(order.status === "completed"){
+            debugger;
+            removeNode = document.getElementById(getPendOrderClass(order.orderid));
+            if(removeNode)
+                pendingListNode.removeChild(removeNode);
+        }
+
     })
 
     Object.keys(pendingOrderList).forEach((orderId) => {
-        let order = pendingOrderList[order];
+        let order = pendingOrderList[orderId];
         updatePendingOrder(order);
     })
 
@@ -256,6 +269,8 @@ function updatePendingOrder(order) {
     date = new Date(order.timestamp)
 
     console.log(itemsInOrder[1])
+    if(document.getElementById(getPendOrderClass(order.orderid))) return;
+
     orderNode.setAttribute("id",`pend-order${order.orderid}`);
     orderNode.setAttribute("class", "item-pend-card");
     console.log(listItems[items[0]].name)
@@ -347,6 +362,7 @@ function updateCounter(){
 }
 
 function addToOrderList(itemsToOrder) {
+    if(!orderNo)orderNo= 2;
     const order = {
         orderid: orderNo,
         items: itemsToOrder,
@@ -372,7 +388,7 @@ function quickOrder(itemName) {
     addToOrderList(quickCart);
 }
 
-function addNewOrder() {
+function onPlaceOrder() {
     Object.keys(cartItemsList).map((itemName) => {
         cartItemsList[itemName].qty = document.getElementById(`qty-${itemName}`).value;
         // console.log()
