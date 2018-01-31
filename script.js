@@ -100,7 +100,7 @@ function getOrderFromLocal() {
     const listOfStr = !!(storedList) ? JSON.parse(storedList) : {};
 
     orderList= {}
-    Object.keys(listOfStr).map( (orderId) => {
+    Object.keys(listOfStr).forEach( (orderId) => {
         orderList[orderId] = JSON.parse(listOfStr[orderId]);
     })
     orderNo = localStorage.getItem("orderNo");
@@ -108,7 +108,7 @@ function getOrderFromLocal() {
 
 function writeToLocal() {
     let dataToStore = {};
-    Object.keys(orderList).map( (orderId) => {
+    Object.keys(orderList).forEach( (orderId) => {
             let order = orderList[orderId];
             dataToStore[orderId] = JSON.stringify(order);
     } )
@@ -131,7 +131,7 @@ function showCategories() {
 }
 
 function showItemsList(listToShow) {
-    Object.keys(listToShow).map((itemName) => {
+    Object.keys(listToShow).forEach((itemName) => {
         const item = listToShow[itemName];
         const itemNode = document.createElement("li");
 
@@ -246,7 +246,7 @@ function showPendingOrders() {
         if(order.status === "pending")
             pendingOrderList[orderId] = order;
         else if(order.status === "completed"){
-            debugger;
+            // debugger;
             removeNode = document.getElementById(getPendOrderClass(order.orderid));
             if(removeNode)
                 pendingListNode.removeChild(removeNode);
@@ -389,7 +389,7 @@ function quickOrder(itemName) {
 }
 
 function onPlaceOrder() {
-    Object.keys(cartItemsList).map((itemName) => {
+    Object.keys(cartItemsList).forEach((itemName) => {
         cartItemsList[itemName].qty = document.getElementById(`qty-${itemName}`).value;
         // console.log()
     })
@@ -439,7 +439,7 @@ function categoryChanged(event) {
                 return listItems[item].category === categoryLive;
         })
 
-            filteredList.map((item) => {
+            filteredList.forEach((item) => {
                 listToShow[item] = listItems[item];
         })
     }
