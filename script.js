@@ -195,7 +195,7 @@ function showOrders() {
         const itemsInOrder = order.items;
         const items = Object.keys(itemsInOrder);
         const orderNode = document.createElement("li");
-        const complSel = (order.status == "completed")? "selected" : "";
+        const complSel = (order.status == "pending")? "selected" : "";
         const pendSel = (order.status == "completed")? "selected" : "";
         const rejSel = (order.status == "rejected")?"selected":"";
         date = new Date(order.timestamp)

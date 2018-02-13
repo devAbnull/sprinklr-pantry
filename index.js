@@ -1,142 +1,131 @@
-const categoryModel = new function () {
-    this.all = "all";
-    this.beverages = "beverages";
-    this.fruits = "fruits";
-    this.snacks = "snacks";
-    this.drinks = "drinks";
-    this.categories = [ this.all, this.beverages, this.fruits, this.snacks, this.drinks ];
-    this.categoryLive = this.all;
+const CATEGORY_TYPES = {
+    ALL: "all",
+    BEVERAGES: "beverages",
+    FRUITS: "fruits",
+    SNACKS: "snacks",
+    DRINKS: "drinks"
+}
+
+const categoryModel =  {
+    categories : [CATEGORY_TYPES.ALL, CATEGORY_TYPES.BEVERAGES, CATEGORY_TYPES.DRINKS, CATEGORY_TYPES.FRUITS, CATEGORY_TYPES.SNACKS],
+    categoryLive : CATEGORY_TYPES.ALL
 }
 
 const itemListModel =  {
     "tea" : {
         "name": "tea",
-        "category": categoryModel.beverages,
+        "category": CATEGORY_TYPES.BEVERAGES,
         "img": "tea.jpg"
     },
     "coffee" : {
         "name": "coffee",
-        "category": categoryModel.beverages,
+        "category": CATEGORY_TYPES.BEVERAGES,
         "img": "coffee.jpg"
     },
     "eggs" : {
         "name": "eggs",
-        "category": categoryModel.snacks,
+        "category": CATEGORY_TYPES.SNACKS,
         "img": "eggs.jpg"
     },
     "mangojuice" : {
         "name": "mango juice",
-        "category": categoryModel.snacks,
+        "category": CATEGORY_TYPES.DRINKS,
         "img": "mangojuice.jpg"
     },
     "mango" : {
         "name": "mango",
-        "category": categoryModel.fruits,
+        "category": CATEGORY_TYPES.FRUITS,
         "img": "mango.jpg"
     },
     "orangejuice" : {
         "name": "orange juice",
-        "category": categoryModel.drinks,
+        "category": CATEGORY_TYPES.DRINKS,
         "img": "orangejuice.png"
     },
     "greentea" : {
         "name": "green tea",
-        "category": categoryModel.beverages,
+        "category": CATEGORY_TYPES.BEVERAGES,
         "img": "greentea.jpg"
     },
     "maggi": {
         "name": "maggi",
-        "category": categoryModel.snacks,
+        "category": CATEGORY_TYPES.SNACKS,
         "img": "maggi.jpg"
     },
     "grapes": {
         "name": "grapes",
-        "category" : categoryModel.fruits,
+        "category" : CATEGORY_TYPES.FRUITS,
         "img": "grapes.jpg"
     },
     "goodday" : {
         "name": "good day",
-        "category" : categoryModel.snacks,
+        "category" : CATEGORY_TYPES.SNACKS,
         "img": "goodday.jpg"
     },
     "blackcoffee" : {
         "name": "black coffee",
-        "category": categoryModel.beverages,
+        "category": CATEGORY_TYPES.BEVERAGES,
         "img": "blackcoffee.jpg"
     }
 };
 
-const orderModel = new function () {
-    this.orderList = [];
-    this.orderNo = 0;
-    // console.log("le")
-    // this.pendingStatus = "pending";
-    // this.completedStatus = "completed";
+const orderModel = {
+    orderList : [],
+    orderNo : Number(localStorage.getItem("orderNo")) || 0
 }
 
-const pendingOrderModel = new function () {
-    this.status = "pending";
-    this.deleteBtnObj =  {}
-
-    this.pendingOrderList = [];
+orderModel.getOrderListFromLocal = function () {
+    const listFromLocal = JSON.parse(localStorage.getItem("orderList"));
+    if(!listFromLocal) {
+        orderModel.orderList = [];
+        return;
+    }
+    orderModel.orderList = listFromLocal.map( (orderStr)=> JSON.parse(orderStr));
 }
 
-const completedOrdeModel = new function () {
-    this.status = "completed";
-    this.completedOrderList = [];
+const pendingOrderModel = {
+    status : "pending",
+    pendingOrderList: [],
+    deleteBtnObj : {
+        label: "Delete",
+        className: "delete-btn"
+    }
 }
 
-const cartModel = new function () {
-    this.cartItemsList = {};
-    this.cartQty = 0;
+const completedOrderModel = {
+    status : "completed",
+    completedOrderList : [],
+    reOrderBtnObj : {
+        label: "Reorder",
+        className: "reorder-btn"
+    }
 }
 
-const userModel = new function () {
-    this.userDetails = {name: "Abhijit", tableNo: 9};
+const cartModel = {
+    cartItemsList : {},
+    cartQty : 0
+}
+
+const userModel= {
+    userDetails : {name: "Abhijit", tableNo: 9}
 }
 
 
-const controller = new function(){
+const ControllerC =  function(){
 
     this.init = function () {
-        // const orderList = this.filterOrderList("xx");
-        this.getItemsFromLocal();
-        this.createDeleteBtnObj();
+        orderModel.getOrderListFromLocal();
         categoryView.showCategories(categoryModel.categories);
         itemListView.showItemsList(itemListModel);
-        // console.log(pendingOrderView)
         const pendingOrderList = this.filterOrderList(pendingOrderModel.status);
-        orderListView.showOrderList(pendingOrderList, pendingOrderModel.deleteBtnObj, this.deletePendingOrder, orderListView.pendingListNode);
-    }
+        const completedOrderList = this.filterOrderList(completedOrderModel.status);
 
-    this.createDeleteBtnObj = function () {
-        pendingOrderModel.deleteBtnObj = {
-            label: "Delete",
-            className: "delete-btn",
-        }
-    }
-    
+        orderListView.showOrderList(pendingOrderList, pendingOrderModel.deleteBtnObj, this.deletePendingOrder, orderListView.pendingListNode);
+        orderListView.showOrderList(completedOrderList, completedOrderModel.reOrderBtnObj, this.reorder, orderListView.completedListNode);
+    };
+
     this.pushToOrderList= function (order) {
         orderModel.orderList.push(order);
-    };
-
-    this.getOrderNoFromLocal= function () {
-        orderModel.orderNo = Number(localStorage.getItem("orderNo"));
-        console.log(typeof orderModel.orderNo);
-    };
-    
-    this.getOrderListFromLocal = function () {
-        const listFromLocal = JSON.parse(localStorage.getItem("orderList"));
-        if(!listFromLocal) {
-            orderModel.orderList = [];
-            return;
-        }
-        orderModel.orderList = listFromLocal.map( (orderStr)=> JSON.parse(orderStr));
-    }
-
-    this.getItemsFromLocal= function () {
-        this.getOrderListFromLocal();
-        this.getOrderNoFromLocal();
     };
 
     this.writeToLocal = function() {
@@ -153,97 +142,29 @@ const controller = new function(){
         return  itemListModel[itemName];
     }
 
-    this.onAddToCart = function (itemName) {
-        if(!cartModel.cartItemsList[itemName]){
-            const cartItem = { qty: 1, name: itemName};
-            this.updateCartList(cartItem);
-            this.updateCartCounter(cartModel.cartQty+1);
-            cartView.addNewCartItem(cartItem);
-            cartView.setCartCounterLabel(cartModel.cartQty);
-        }
-    };
-
     this.updateCartCounter = function (newValue) {
         cartModel.cartQty = newValue;
+        cartView.setCartCounterLabel(cartModel.cartQty);
     };
 
     this.updateOrderNo = function (newValue) {
         orderModel.orderNo = newValue;
     };
-    
-    this.addToOrderList = function (itemsToOrder) {
-        console.log(pendingOrderModel, orderModel, itemListModel, cartModel, userModel)
-        const order = {
-            orderid: orderModel.orderNo,
-            items: itemsToOrder,
-            timestamp: Date.now(),
-            status: pendingOrderModel.status,
-            user: userModel.userDetails
-        }
-        this.pushToOrderList(order);
-        this.updateOrderNo(orderModel.orderNo+1);
-        this.writeToLocal();
-    };
-    
-    this.onOrderNow = function (itemName) {
-        const quickCart = {};
-        quickCart[itemName] = {
-            qty: 1, name: itemName
-        }
-        this.addToOrderList(quickCart);
-    };
 
-    this.getCartItemQty = function (itemName){
-        return document.getElementById(`qty-${itemName}`).value;
-    };
-    
-    this.onPlaceOrder = function () {
-        for(itemName in cartModel.cartItemsList){
-            cartModel.cartItemsList[itemName] = this.getCartItemQty(itemName);
-        }
-        this.addToOrderList(cartModel.cartItemsList);
-
-    };
-
-    this.clearCart = function () {
-        Object.keys(cartModel.cartItemsList).forEach((item) => {
-            delete cartModel.cartItemsList[item];
-        })
-        this.updateCartCounter(0);
-        
-    };
-    
-    this.deleteCartItem = function (itemName) {
-        const cartItemNode =  this.getCartItemNode(itemName);
-        if(itemName in cartModel.cartItemsList) delete cartItemsList[itemName];
-        this.updateCartCounter(cartModel.cartQty-1);
-    };
-
-    this.getCarItemNode = function (itemName) {
+    this.getCartItemNode = function (itemName) {
         return document.getElementById(`cart-${itemName}`);
     };
 
-    this.deleteOrder = function (orderId) {
-        if(orderModel.orderList[orderId]){
-            delete orderModel.orderList[orderId];
-        }
-        this.writeToLocal();
-    }
-    
     this.getPendingOrderNode = function (orderId) {
         return document.getElementById(`pend-order${orderId}`);
     }
-    
-    this.deletePendingOrder =  (orderId) => {
-        this.deleteOrder(orderId);
-        const nodeToDel = this.getPendingOrderNode(orderId);
-    }
-    
-    this.onCategoryChange = function (newCategory) {
-        if(newCategory === categoryModel.categoryLive) return;
-        const listToDisplay = {};
 
-        if(newCategory === categoryModel.all){
+    this.onCategoryChange = function (newCategory) {
+
+        if(newCategory === categoryModel.categoryLive) return;
+        let listToDisplay = {};
+
+        if(newCategory === CATEGORY_TYPES.ALL){
             listToDisplay = itemListModel;
         }
         else{
@@ -259,23 +180,9 @@ const controller = new function(){
         const categoryToUnselect = document.getElementById(categoryModel.categoryLive);
         categoryToSelect.setAttribute("class", "category-blck select");
         categoryToUnselect.setAttribute("class", "category-blck unselect");
-
+        categoryModel.categoryLive = newCategory;
         itemListView.showItemsList(listToDisplay);
 
-    }
-
-    this.getSelectionNode = function (orderId) {
-        return document.getElementById(`status-sel-${orderId}`);
-    }
-
-    this.onSelectionChanged = function (orderId) {
-        newStatus = this.getSelectionNode(orderId).value;
-        this.setOrderStatus(orderId, newStatus);
-        writeLocal();
-    }
-
-    this.setOrderStatus = function(orderId, newStatus){
-        orderModel.orderList[orderId].status = newStatus;
     }
 
     this.filterOrderList = function (status) {
@@ -284,20 +191,90 @@ const controller = new function(){
         })
     }
 
+    this.onPlaceOrder = function () {
+        for(itemName in cartModel.cartItemsList){
+            cartModel.cartItemsList[itemName] ={ qty: cartView.getCartItemQty(itemName), name: itemName};
+        }
+        this.addToOrderList(cartModel.cartItemsList);
+        this.clearCart();
+        location.href="#";
+    };
+
+    this.reorder = function (orderId) {
+        const itemList = orderModel.orderList[orderId].items;
+        this.addToOrderList(itemList);
+    }
+
+    this.clearCart = function () {
+        Object.keys(cartModel.cartItemsList).forEach((item) => {
+            delete cartModel.cartItemsList[item];
+    })
+        this.updateCartCounter(0);
+
+    };
+
+    this.deleteCartItem = function (itemName) {
+        const cartItemNode =  this.getCartItemNode(itemName);
+        if(itemName in cartModel.cartItemsList) delete cartModel.cartItemsList[itemName];
+        cartView.cartListNode.removeChild(cartItemNode);
+        this.updateCartCounter(cartModel.cartQty-1);
+    };
+
+    this.deleteOrder = function (orderId) {
+        if(orderModel.orderList[orderId]){
+            delete orderModel.orderList[orderId];
+            console.log(orderModel.orderList);
+        }
+
+        this.writeToLocal();
+    }
+
+    this.deletePendingOrder = function (orderId) {
+        this.deleteOrder(orderId);
+        const nodeToDel = this.getPendingOrderNode(orderId);
+        orderListView.pendingListNode.removeChild(nodeToDel);
+    }
+
+    this.onAddToCart = function (itemName) {
+        if(!cartModel.cartItemsList[itemName]){
+            const cartItem = { qty: 1, name: itemName};
+            this.updateCartList(cartItem);
+            this.updateCartCounter(cartModel.cartQty+1);
+            cartView.addNewCartItem(cartItem);
+        }
+    };
+
+    this.addToOrderList = function (itemsToOrder) {
+        console.log(itemsToOrder)
+        const order = {
+            orderid: orderModel.orderNo,
+            items: itemsToOrder,
+            timestamp: Date.now(),
+            status: pendingOrderModel.status,
+            user: userModel.userDetails
+        }
+        this.pushToOrderList(order);
+        this.updateOrderNo(orderModel.orderNo+1);
+        orderListView.addNewOrder(order, orderListView.pendingListNode , pendingOrderModel.deleteBtnObj, this.deletePendingOrder);
+        this.writeToLocal();
+    };
+
+    this.onOrderNow = function (itemName) {
+        const quickCart = {};
+        quickCart[itemName] = {
+            qty: 1, name: itemName
+        }
+        this.addToOrderList(quickCart);
+    };
 }
 
-const itemListView = new function () {
+const ItemListViewC = function () {
     // this.init = function () {
     this.itemsListNode = document.getElementById("item-list");
-    // }
-
-    // this.init = function() {
-    //
-    // }
 
     this.showItemsList = function (listToDisplay) {
         const fragment = document.createDocumentFragment();
-
+        this.itemsListNode.innerHTML = ""
         Object.keys(listToDisplay).forEach( (itemName)=>{
             const item = listToDisplay[itemName];
             const itemNode = document.createElement("li");
@@ -335,7 +312,7 @@ const itemListView = new function () {
                 controller.onOrderNow(itemName);
             })
 
-            addToCartNode.addEventListener("click", (itemName) => {
+            addToCartNode.addEventListener("click", () => {
                 controller.onAddToCart(itemName);
             })
             fragment.appendChild(itemNode);
@@ -345,8 +322,10 @@ const itemListView = new function () {
     }
 }
 
-const orderListView = new function () {
+const OrderListViewC = function () {
     this.pendingListNode = document.getElementById("pending-order-list");
+    this.completedListNode = document.getElementById("order-completed-list");
+
     this.showOrderList = function (listToShow, buttonObj, cb, parentNode) {
         const fragment = document.createDocumentFragment();
         listToShow.forEach( (order) => {
@@ -360,7 +339,6 @@ const orderListView = new function () {
         const itemsInOrder = order.items;
         const items = Object.keys(itemsInOrder);
         const date = new Date(order.timestamp)
-
         orderNode.setAttribute("id",`pend-order${order.orderid}`);
         orderNode.setAttribute("class", "item-pend-card");
 
@@ -379,19 +357,24 @@ const orderListView = new function () {
 
         const btnNode = orderNode.getElementsByClassName("order-list-btn")[0];
         btnNode.addEventListener("click", () => {
-               cb(order.orderid);
+               cb.call(controller, order.orderid);
         });
 
         parentNode.appendChild(orderNode);
     }
 }
 
-const cartView = function () {
+const CartViewClass = function () {
     this.cartListNode = document.getElementById("order-list");
-
+    const placeOrderBtn = document.getElementsByClassName("place-order-btn")[0];
+    placeOrderBtn.addEventListener("click", () => controller.onPlaceOrder());
     this.getItemQtyLabel = function (itemName) {
         return `qty-${itemName}`;
     }
+
+    this.getCartItemQty = function (itemName){
+        return document.getElementById(`qty-${itemName}`).value;
+    };
     
     this.setCartCounterLabel = function (newValue) {
         document.getElementById("cart-qty").innerText = newValue;
@@ -409,7 +392,7 @@ const cartView = function () {
                 <span class="order-qty">
                             <label class="qty-label">Qty:</label>
                             
-                            <input type="number" min="0" class="qty-number" id=${this.getItemQtyLabel(item.name)} value=${cartItem.qty} >
+                            <input type="number" min="0" class="qty-number" id=${this.getItemQtyLabel(cartItem.name)} value=${cartItem.qty} >
                             
                         </span>
                 <button class="delete-cart-item pend-btns">
@@ -420,11 +403,11 @@ const cartView = function () {
         deleteBtn.addEventListener("click", () => {
             controller.deleteCartItem(item.name)
         })
-        cartListNode.appendChild(itemNode);
+        this.cartListNode.appendChild(itemNode);
     }
 }
 
-const categoryView = new function () {
+const CategoryViewClass = function () {
     this.categoryListNode = document.getElementById("categories-list");
     const fragment = document.createDocumentFragment();
 
@@ -437,7 +420,7 @@ const categoryView = new function () {
             categoryNode.setAttribute("class", `category-blck ${state}`);
             categoryNode.innerHTML = `<a>${category}</a>`;
 
-            categoryNode.addEventListener("click", (category) => {
+            categoryNode.addEventListener("click", () => {
                 controller.onCategoryChange(category);
             })
             fragment.appendChild(categoryNode);
@@ -447,4 +430,9 @@ const categoryView = new function () {
 }
 
 // itemListView.init();
+var categoryView = new CategoryViewClass();
+var cartView = new CartViewClass();
+var itemListView = new ItemListViewC();
+var orderListView = new OrderListViewC();
+var controller = new ControllerC();
 controller.init();
