@@ -1,351 +1,360 @@
 import React, {Fragment, Component} from "react";
 import ReactDOM from "react-dom";
-import * as _ from "lodash";
+import App from "./app";
+import MODEL from "./helper";
 
-import ItemList from "./itemlist";
-import CategoryList from "./categorylist";
-import OrderList from "./orderlist";
-import Cart from "./cart";
-import controller from "./controller";
-
+// console.log(MODEL);
+const CATEGORY_TYPES = MODEL.CATEGORY_TYPES;
+const categoryModel = MODEL.categoryModel;
+const itemListModel = MODEL.itemListModel;
+// console.log("hey ther!!!")
 //
-// const ItemListViewC = function () {
-//     // this.init = function () {
-//     this.itemsListNode = document.getElementById("item-list");
+// const CATEGORY_TYPES = {
+//     ALL: "all",
+//     BEVERAGES: "beverages",
+//     FRUITS: "fruits",
+//     SNACKS: "snacks",
+//     DRINKS: "drinks"
+// }
 //
-//     this.showItemsList = function (listToDisplay) {
-//         const fragment = document.createDocumentFragment();
-//         ReactDOM.render(<ItemList list={listToDisplay} />,this.itemsListNode);
-//     //     Object.keys(listToDisplay).forEach( (itemName)=>{
-//     //         const item = listToDisplay[itemName];
-//     //     const itemNode = document.createElement("li");
-//     //
-//     //     itemNode.setAttribute("id", item["name"]);
-//     //     itemNode.setAttribute("class", "item-card")
-//     //
-//     //     itemNode.innerHTML = `
-//     //         <div class="item-img-block">
-//     //             <img class="item-img" alt="no image to dislpay" src="./images/${item.img}" />
-//     //             <div class="overlay-img">
-//     //                 <div class="add-cart">
-//     //                     <button class="add-cart-icon add-to-cart-node">
-//     //                         <div>Add to cart</div>
-//     //                     </button>
-//     //                     <button class="add-cart-icon quick-order-btn">
-//     //                         <div>Order Now</div>
-//     //                     </button>
-//     //                 </div>
-//     //             </div>
-//     //         </div>
-//     //         <div class="item-content">
-//     //             <div class="item-title">
-//     //                 ${item.name}
-//     //             </div>
-//     //             <div class="item-category">
-//     //                 ${item.category}
-//     //             </div>
-//     //         </div>`
-//     //
-//     //     const quickOrderNode = itemNode.getElementsByClassName("quick-order-btn")[0];
-//     //     const addToCartNode = itemNode.getElementsByClassName("add-to-cart-node")[0];
-//     //
-//     //     quickOrderNode.addEventListener("click", () => {
-//     //         controller.onOrderNow(itemName);
-//     // })
-//     //
-//     //     addToCartNode.addEventListener("click", () => {
-//     //         controller.onAddToCart(itemName);
-//     // })
-//     //     fragment.appendChild(itemNode);
-//     // })
-//     //
-//     //     this.itemsListNode.appendChild(fragment);
+// const categoryModel =  {
+//     categories : [CATEGORY_TYPES.ALL, CATEGORY_TYPES.BEVERAGES, CATEGORY_TYPES.DRINKS, CATEGORY_TYPES.FRUITS, CATEGORY_TYPES.SNACKS],
+//     categoryLive : CATEGORY_TYPES.ALL
+// }
+//
+// const itemListModel =  {
+//     "tea" : {
+//         "id":"tea",
+//         "name": "tea",
+//         "category": CATEGORY_TYPES.BEVERAGES,
+//         "img": "tea.jpg"
+//     },
+//     "coffee" : {
+//         "id": "coffee",
+//         "name": "coffee",
+//         "category": CATEGORY_TYPES.BEVERAGES,
+//         "img": "coffee.jpg"
+//     },
+//     "eggs" : {
+//         "id": "eggs",
+//         "name": "eggs",
+//         "category": CATEGORY_TYPES.SNACKS,
+//         "img": "eggs.jpg"
+//     },
+//     "mangojuice" : {
+//         "id": "mangojuice",
+//         "name": "mango juice",
+//         "category": CATEGORY_TYPES.DRINKS,
+//         "img": "mangojuice.jpg"
+//     },
+//     "mango" : {
+//         "id":"mango",
+//         "name": "mango",
+//         "category": CATEGORY_TYPES.FRUITS,
+//         "img": "mango.jpg"
+//     },
+//     "orangejuice" : {
+//         "id": "oraangejuice",
+//         "name": "orange juice",
+//         "category": CATEGORY_TYPES.DRINKS,
+//         "img": "orangejuice.png"
+//     },
+//     "greentea" : {
+//         "id": "greentea",
+//         "name": "green tea",
+//         "category": CATEGORY_TYPES.BEVERAGES,
+//         "img": "greentea.jpg"
+//     },
+//     "maggi": {
+//         "id": "maggi",
+//         "name": "maggi",
+//         "category": CATEGORY_TYPES.SNACKS,
+//         "img": "maggi.jpg"
+//     },
+//     "grapes": {
+//         "id": "grapes",
+//         "name": "grapes",
+//         "category" : CATEGORY_TYPES.FRUITS,
+//         "img": "grapes.jpg"
+//     },
+//     "goodday" : {
+//         "id": "goodday",
+//         "name": "good day",
+//         "category" : CATEGORY_TYPES.SNACKS,
+//         "img": "goodday.jpg"
+//     },
+//     "blackcoffee" : {
+//         "id": "blackcoffee",
+//         "name": "black coffee",
+//         "category": CATEGORY_TYPES.BEVERAGES,
+//         "img": "blackcoffee.jpg"
 //     }
-//
-// }
-//
-// const OrderListViewC = function () {
-//     this.pendingListNode = document.getElementById("pending-order-list");
-//     this.completedListNode = document.getElementById("order-completed-list");
-//
-//     this.showOrderList = function (listToShow, buttonObj, cb, parentNode) {
-//     //     const fragment = document.createDocumentFragment();
-//     //     listToShow.forEach( (order) => {
-//     //         this.addNewOrder(order, fragment, buttonObj, cb)
-//     // })
-//     //     parentNode.appendChild(fragment);
-//         ReactDOM.render(
-//             <OrderList
-//                 orderList = {listToShow}
-//                 btnLabel = {buttonObj.label}
-//                 btnClass = {buttonObj.className}
-//                 cb = {cb}
-//             />,
-//             parentNode);
-//     }
-//
-//     // this.addNewOrder = function (order, parentNode, buttonObj, cb){
-//     //     const orderNode = document.createElement("li");
-//     //     const itemsInOrder = order.items;
-//     //     const items = Object.keys(itemsInOrder);
-//     //     const date = new Date(order.timestamp)
-//     //     orderNode.setAttribute("id",`pend-order${order.orderid}`);
-//     //     orderNode.setAttribute("class", "item-pend-card");
-//     //
-//     //     orderNode.innerHTML = `
-//     //          <div class="pend-content">
-//     //             <ul class="items">
-//     //                 ${items.map(itemName => {
-//     //         return `<li class="item-name"><div class="item-name-only">${itemName}</div><span class="item-qty"> ${itemsInOrder[itemName].qty}</span></li>`
-//     //     }).join("")}
-//     //             </ul>
-//     //          </div>
-//     //          <div class="time-remove">
-//     //             ${date.getHours() +":"+ date.getMinutes()}
-//     //             <button class="order-list-btn ${buttonObj.className}">${buttonObj.label}</button>
-//     //          </div>`
-//     //
-//     //     const btnNode = orderNode.getElementsByClassName("order-list-btn")[0];
-//     //     btnNode.addEventListener("click", () => {
-//     //         cb.call(controller, order.orderid);
-//     // });
-//     //
-//     //     parentNode.appendChild(orderNode);
-//     // }
-// }
-//
-// const CartViewClass = function () {
-//     this.cartListNode = document.getElementById("order-list");
-//     const placeOrderBtn = document.getElementsByClassName("place-order-btn")[0];
-//     // placeOrderBtn.addEventListener("click", () => controller.onPlaceOrder());
-//     // this.getItemQtyLabel = function (itemName) {
-//     //     return `qty-${itemName}`;
-//     // }
-//     //
-//     // this.getCartItemQty = function (itemName){
-//     //     return document.getElementById(`qty-${itemName}`).value;
-//     // };
-//     //
-//     // this.setCartCounterLabel = function (newValue) {
-//     //     document.getElementById("cart-qty").innerText = newValue;
-//     // }
-//     //
-//     // this.addNewCartItem = function (cartItem) {
-//     //     const item = controller.getItem(cartItem.name);
-//     //     const itemNode = document.createElement("li");
-//     //
-//     //     itemNode.setAttribute("id",`cart-${item.name}`);
-//     //     itemNode.setAttribute("class","cart-item");
-//     //     itemNode.innerHTML = `
-//     //         <img class="cart-item-img" src="./images/${item["img"]}"/>
-//     //             <span class="cart-item-title">${item["name"]}</span>
-//     //             <span class="order-qty">
-//     //                         <label class="qty-label">Qty:</label>
-//     //
-//     //                         <input type="number" min="0" class="qty-number" id=${this.getItemQtyLabel(cartItem.name)} value=${cartItem.qty} >
-//     //
-//     //                     </span>
-//     //             <button class="delete-cart-item pend-btns">
-//     //                 <i class="fa fa-trash" aria-hidden="true"></i>
-//     //             </button>`
-//     //
-//     //     const deleteBtn = itemNode.getElementsByClassName("delete-cart-item")[0];
-//     //     deleteBtn.addEventListener("click", () => {
-//     //         controller.deleteCartItem(item.name)
-//     // })
-//     //     this.cartListNode.appendChild(itemNode);
-//     // }
-// }
-//
-// const CategoryViewClass = function () {
-//     this.categoryListNode = document.getElementById("categories-list");
-//     const fragment = document.createDocumentFragment();
-//
-//     this.showCategories = function (categorylist) {
-//         ReactDOM.render(
-//             <CategoryList
-//                 categoryList={categorylist}
-//                 onCategoryChange = {controller.onCategoryChange}
-//                 categoryLive = {controller.getcategoryLive()}
-//             />,
-//             this.categoryListNode
-//             )
-//     //     categorylist.forEach((category) => {
-//     //         const categoryNode = document.createElement("li");
-//     //     const state = (category === categoryModel.categoryLive)?"select":"unselect";
-//     //
-//     //     categoryNode.setAttribute("id",category);
-//     //     categoryNode.setAttribute("class", `category-blck ${state}`);
-//     //     categoryNode.innerHTML = `<a>${category}</a>`;
-//     //
-//     //     categoryNode.addEventListener("click", () => {
-//     //         controller.onCategoryChange(category);
-//     // })
-//     //     fragment.appendChild(categoryNode);
-//     // })
-//     //     this.categoryListNode.appendChild(fragment);
-//     }
-// }
+// };
+
+const orderModel = {
+    orderList: [],
+    orderNo: Number(localStorage.getItem("orderNo")) || 0 ,
 
 
-class App extends Component {
-    constructor(props){
-        super(props);
-        this.onAddToCart = this.onAddToCart.bind(this);
-        this.onCategoryChange = this.onCategoryChange.bind(this);
-        this.state = {
-            cartqty: 0,
-            cartItemsList: [],
-            categoryLive: controller.getcategoryLive(),
-            listToShow: this.props.itemList
+    getOrderListFromLocal() {
+        const listFromLocal = JSON.parse(localStorage.getItem("orderList"));
+        if (!listFromLocal) {
+            this.orderList = [];
+            return;
         }
-        debugger
+        this.orderList = listFromLocal.map((orderStr) => JSON.parse(orderStr));
     }
+}
 
-    onAddToCart(itemName) {
-        const cartitem = controller.onAddToCart(itemName);
-        this.setState((prevState => {
-            const newCartList = prevState.cartItemsList.push(cartitem);
-            return {
-                cartqty: prevState.cartqty +1,
-                cartItemsList: newCartList
-            }
-
-        }))
+const pendingOrderModel = {
+    status : "pending",
+    pendingOrderList: [],
+    deleteBtnObj : {
+        label: "Delete",
+        className: "delete-btn"
     }
+}
 
-    onCategoryChange(newCategory) {
-        const listToDisplay = controller.onCategoryChange(newCategory);
-        const listArr = _.mapValues(listToDisplay, (value)=>value);
-        this.setState({
-            listToShow: listArr
-        })
+const completedOrderModel = {
+    status : "completed",
+    completedOrderList : [],
+    reOrderBtnObj : {
+        label: "Reorder",
+        className: "reorder-btn"
     }
+}
 
-    onDeleteItemCart(itemName) {
-        const newCartList = controller.deleteCartItem(itemName);
-        this.setState(prevState => {
-            return {
-                cartqty: prevState.cartqty -1,
-                cartItemsList: newCartList
-            }
-        })
-    }
+const cartModel = {
+    cartItemsList : {},
+    cartQty : 0
+}
 
-    onPlaceOrder() {
-        controller.onPlaceOrder();
-        this.setState(
-            {cartqty: 0, cartItemsList: []}
-        )
-    }
+const userModel= {
+    userDetails : {name: "Abhijit", tableNo: 9}
+}
 
-    onOrderNow(itemName) {
-        controller.onOrderNow(itemName)
-    }
 
-    render(){
-        return (
-            <Fragment>
-            <header>
-                <div class="main-header"><img class="logo" alt="no image to dislpay" src="https://media.glassdoor.com/sqll/427532/sprinklr-squarelogo-1461344438537.png" />
-                    Sprinklr Pantry
-                    <a class="user-name" href="#profile-popup">Hi, Abhijit</a>
-                </div>
-                <nav class="categories-nav">
-                    <ul id="categories-list">
-                        <CategoryList
-                            categoryList={controller.getCategories()}
-                            onCategoryChange = {this.onCategoryChange}
-                            categoryLive = {this.state.categoryLive}
-                        />
-                    </ul>
-                    <a class="btn cart-icon show-cart" href="#cart-popup">
-                        <i class="fa fa-shopping-cart show-cart-icon" aria-hidden="true"></i><label class="cart-label">Cart({this.state.cartqty})</label>
-                    </a>
-                </nav>
-
-            </header>
-            <main class="content">
-                <section class="left-section">
-                    <ItemList
-                        itemsList={this.state.listToShow}
-                        onOrderNow={this.onOrderNow}
-                        onAddToCart={this.onAddToCart}
-                    />
-                </section>
-                <section class="right-section">
-                    <div class="pending-order-list-blck">
-                        <h2>Pending</h2>
-                        <ul id="pending-order-list" class="item-list">
-                            <OrderList
-                                orderList={this.props.pendingOrderList}
-                                btnLabel = {controller.getDeletebtn().label}
-                                btnClass = {controller.getDeletebtn().className}
-                                cb = {controller.deletePendingOrder}
-                            />
-                        </ul>
-                    </div>
-                    <div class="order-completed-list-blck">
-                    <h2>Order History</h2>
-                    <ul id="order-completed-list">
-                        <OrderList
-                            orderList={this.props.completedOrderList}
-                            btnLabel = {controller.getReorderBtn().label}
-                            btnClass = {controller.getReorderBtn().className}
-                            cb = {controller.reorder}
-                        />
-                    </ul>
-                    </div>
-                </section>
-            </main>
-        <div id="cart-popup" class="overlay">
-            <Cart
-                cartItemList={this.state.cartItemsList}
-                deleteCartItem = {this.onDeleteItemCart}
-
-            />
-        </div>
-        <div id="profile-popup" class="overlay">
-            <div class="popup user-details-update">
-                <a class="close" href="#">&times;</a>
-                <h3 class="profile-heading">Profile</h3>
-                <img class="usr-img" src="https://thumb9.shutterstock.com/display_pic_with_logo/2696557/477419116/stock-vector-user-line-icon-on-black-background-477419116.jpg" />
-                <table>
-                <tr class="update-name-blck">
-                <td>Name</td>
-                <td><input type="text" value="Abhijit" class="user-name-txt"/></td>
-                </tr>
-                <tr class="update-table-blck">
-                    <td>Table</td>
-                    <td><input type="number" value="9" class="user-name-table" /></td>
-                </tr>
-                </table>
-                <button class="order-list-btn save-btn">Save</button>
-                <button class="order-list-btn cancel-btn">Cancel</button>
-            </div>
-            <button class="order-list-btn reorder-btn">Reorder</button>
-        </div>
-            </Fragment>
-        )
-    }
+const ControllerC = function() {
 
 }
 
-// itemListView.init();
-// var categoryView = new CategoryViewClass();
-// var cartView = new CartViewClass();
-// var itemListView = new ItemListViewC();
-// var orderListView = new OrderListViewC();
-// var controller = new ControllerC();
-// controller.init();
-const completedOrderList = controller.getCompletedOrders();
-const pendingOrderList = controller.getPendingOrders();
-let x = document.getElementById('root');
-debugger
-ReactDOM.render(
-    <App
-        itemList = {controller.getItemList()}
-        pendingOrderList = {pendingOrderList}
-        completedOrderList={completedOrderList}
-    />,
-    x);
+ControllerC.prototype.init = function() {
+    orderModel.getOrderListFromLocal();
+    const completedOrderList = this.getCompletedOrders();
+    const pendingOrderList = this.getPendingOrders();
+    let x = document.getElementById('root');
+    // debugger
+
+    this.onPlaceOrder = this.onPlaceOrder.bind(this);
+    this.getCartItemQty = this.getCartItemQty.bind(this);
+    this.addToOrderList = this.addToOrderList.bind(this);
+    this.onOrderNow = this.onOrderNow.bind(this);
+    this.deletePendingOrder = this.deletePendingOrder.bind(this);
+
+    ReactDOM.render(
+        <App
+            pendingOrderList = {pendingOrderList}
+            completedOrderList={completedOrderList}
+            getItem = {this.getItem}
+            getcategoryLive={this.getcategoryLive}
+            onAddToCart={this.onAddToCart}
+            onCategoryChange={this.onCategoryChange}
+            deleteCartItem={this.deleteCartItem}
+            onPlaceOrder={this.onPlaceOrder}
+            onOrderNow={this.onOrderNow}
+            getCategories={this.getCategories}
+            getDeletebtn={this.getDeletebtn}
+            deletePendingOrder={this.deletePendingOrder}
+            getReorderBtn={this.getReorderBtn}
+            reorder={this.reorder}
+        />,
+        x);
+    // categoryView.showCategories(categoryModel.categories);
+    // itemListView.showItemsList(itemListModel);
+
+    // orderListView.showOrderList(pendingOrderList, pendingOrderModel.deleteBtnObj, this.deletePendingOrder, orderListView.pendingListNode);
+    // orderListView.showOrderList(completedOrderList, completedOrderModel.reOrderBtnObj, this.reorder, orderListView.completedListNode);
+
+}
+
+ControllerC.prototype.getItemList = function() {
+    return itemListModel;
+}
+
+ControllerC.prototype.getCategories = function(){
+    return categoryModel.categories;
+}
+
+ControllerC.prototype.getItemLists = function(){
+    return itemListModel;
+}
+
+ControllerC.prototype.getDeletebtn = function() {
+    return pendingOrderModel.deleteBtnObj
+}
+
+ControllerC.prototype.getReorderBtn = function() {
+    return completedOrderModel.reOrderBtnObj;
+}
+
+ControllerC.prototype.pushToOrderList = function(order) {
+    orderModel.orderList.push(order);
+}
+
+ControllerC.prototype.writeToLocal = function() {
+    localStorage.setItem("orderNo",orderModel.orderNo);
+    const listToWrite = orderModel.orderList.map( (order) =>  JSON.stringify(order) );
+    localStorage.setItem("orderList",JSON.stringify(listToWrite));
+}
+
+ControllerC.prototype.updateCartList = function(cartItem) {
+    cartModel.cartItemsList[cartItem.name] = cartItem.qty;
+}
+
+ControllerC.prototype.getItem = function(itemName) {
+    return  itemListModel[itemName];
+}
+
+ControllerC.prototype.updateCartCounter = function(newValue) {
+    cartModel.cartQty = newValue;
+    // cartView.setCartCounterLabel(cartModel.cartQty);
+}
+
+ControllerC.prototype.updateOrderNo = function(newValue) {
+    orderModel.orderNo = newValue;
+}
+
+ControllerC.prototype.getCartItemNode = function(itemName) {
+    return document.getElementById(`cart-${itemName}`);
+}
+
+ControllerC.prototype.getPendingOrderNode = function(orderId) {
+    return document.getElementById(`pend-order${orderId}`);
+}
+
+ControllerC.prototype.onCategoryChange = function(newCategory) {
+    if(newCategory === categoryModel.categoryLive) return;
+    let listToDisplay = {};
+
+    if(newCategory === CATEGORY_TYPES.ALL){
+        listToDisplay = itemListModel;
+    }
+    else{
+        for(let itemName in itemListModel){
+            const item = itemListModel[itemName];
+            if(item.category === newCategory){
+                listToDisplay[itemName] = item;
+            }
+        }
+    }
+    categoryModel.categoryLive = newCategory;
+    return listToDisplay;
+
+}
+
+ControllerC.prototype.getcategoryLive = function() {
+    return categoryModel.categoryLive;
+}
+
+ControllerC.prototype.getPendingOrders = function(){
+    return this.filterOrderList(pendingOrderModel.status);
+}
+
+ControllerC.prototype.getCompletedOrders = function(){
+    return this.filterOrderList(completedOrderModel.status);
+}
+
+ControllerC.prototype.filterOrderList = function(status) {
+    return orderModel.orderList.filter( (order) => {
+        if(order) return order.status === status;
+        return;
+    })
+}
+
+ControllerC.prototype.onPlaceOrder = function() {
+    debugger
+    console.log(this);
+    for(let itemName in cartModel.cartItemsList){
+        cartModel.cartItemsList[itemName] ={ qty: this.getCartItemQty(itemName), name: itemName};
+    }
+    this.addToOrderList(cartModel.cartItemsList);
+    this.clearCart();
+    document.location.href="#";
+}
+
+    ControllerC.prototype.getCartItemQty = function(itemName) {
+    return document.getElementById(`qty-${itemName}`).value;
+}
+
+ControllerC.prototype.reorder = function(orderId) {
+    const itemList = orderModel.orderList[orderId].items;
+    this.addToOrderList(itemList);
+}
+
+ControllerC.prototype.clearCart = function() {
+    Object.keys(cartModel.cartItemsList).forEach((item) => {
+        delete cartModel.cartItemsList[item];
+    })
+    // this.updateCartCounter(0);
+
+}
+
+ControllerC.prototype.deleteCartItem = function(itemName) {
+    // const cartItemNode =  this.getCartItemNode(itemName);
+    if(itemName in cartModel.cartItemsList) delete cartModel.cartItemsList[itemName];
+    return cartModel.cartItemsList;
+    // cartView.cartListNode.removeChild(cartItemNode);
+    // this.updateCartCounter(cartModel.cartQty-1);
+}
+
+ControllerC.prototype.deleteOrder = function(orderId) {
+    if(orderModel.orderList[orderId]){
+        delete orderModel.orderList[orderId];
+        console.log(orderModel.orderList);
+    }
+
+    this.writeToLocal();
+}
+
+ControllerC.prototype.deletePendingOrder = function(orderId) {
+    this.deleteOrder(orderId);
+    // const nodeToDel = this.getPendingOrderNode(orderId);
+    // orderListView.pendingListNode.removeChild(nodeToDel);
+}
+
+ControllerC.prototype.onAddToCart = function(itemName) {
+    const cartItem = { qty: 1, name: itemName};
+    if(!cartModel.cartItemsList[itemName]){
+        cartModel.cartItemsList[itemName] = cartItem;
+    }
+    return cartItem;
+}
+
+ControllerC.prototype.addToOrderList = function(itemsToOrder) {
+    console.log(itemsToOrder)
+    const order = {
+        orderid: orderModel.orderNo,
+        items: itemsToOrder,
+        timestamp: Date.now(),
+        status: pendingOrderModel.status,
+        user: userModel.userDetails
+    }
+    this.pushToOrderList(order);
+    this.updateOrderNo(orderModel.orderNo+1);
+    // orderListView.addNewOrder(order, orderListView.pendingListNode , pendingOrderModel.deleteBtnObj, this.deletePendingOrder);
+    this.writeToLocal();
+}
+
+ControllerC.prototype.onOrderNow = function(itemName) {
+    const quickCart = {};
+    quickCart[itemName] = {
+        qty: 1, name: itemName
+    }
+    console.log(this);
+    this.addToOrderList(quickCart);
+}
+
+const controller = new ControllerC();
+ControllerC.constructor = ControllerC;
+controller.init();
+// export default controller;

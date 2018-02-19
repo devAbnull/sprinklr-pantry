@@ -17,7 +17,7 @@ const Order = (props) => {
     const itemsInOrder = props.items;
     const itemsArr = Object.keys(itemsInOrder);
     const date = new Date(props.timestamp)
-    debugger
+    // debugger
     return (
         <li id={`pend-order${props.orderid}`} className="item-pend-card">
             <div className="pend-content">
